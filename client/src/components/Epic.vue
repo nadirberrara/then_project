@@ -4,12 +4,14 @@
     <div v-if="epic && allStories" class="epic" :style="styles">
       <i>by Nadir </i>
       <h1> {{ epic.title }} </h1>
-      <div>
-        <p>{{epic.mainStory}}</p>
-        <strong>then,</strong>
-        <p>{{ epic.nextStories}}</p>
-        </p>
-      </div>
+        <div>
+          <p>{{epic.mainStory}}</p>
+          <strong>then,</strong>
+            <div>
+              <p v-for="nextStory in epic.nextStories">{{ nextStory }}</p>
+            </div>
+          </p>
+        </div>
     </div>
   
     <button v-on:click="addNewStory()" v-if="!edit" :style="stylesButton">and then</button>
@@ -21,15 +23,15 @@
         <strong>then,</strong>        
       <br>
       <button type="submit" v-on:click="submitNewStory()"> submit my story </button>
+      <button type="submit" v-on:click="cancelEditing()"> cancel </button>
     </div>
   
     <div class="stories" :style="styles">
       <div>
-        <tag-stories :stories="allStories"> </tag-stories>
+        <tag-stories :stories="allStories" v-on:nextStory="addNext"> </tag-stories>
       </div>
     </div>
     
-    <button type="submit" v-on:click="selectRandomStory()" :style="stylesButton"> Select randomly a story </button>
   
   </div>
 </template>
@@ -58,7 +60,7 @@ export default {
       },
       stylesButton: {
         padding: "20px",
-        margin: "20px"
+        marginBottom: "30px"
       }
     };
   },
@@ -68,12 +70,15 @@ export default {
     });
 
     this.getStories().then(stories => {
-      console.log(stories)
       this.allStories = stories
     })
+
   },
   methods: {
 
+    addNext(story) {
+      this.epic.nextStories.push(story)
+    },
     getEpic(epicId) {
       return myAPI.get('/epics/' + epicId).then(response => {
         return response.data;
@@ -86,9 +91,14 @@ export default {
       });
     },
 
+    cancelEditing() {
+      this.edit = false
+    },
+
     addNewStory() {
       this.edit = true
     },
+
     submitNewStory() {
       this.edit = false
       myAPI.post("/stories/", { text: this.text }).then(response => {
@@ -98,9 +108,8 @@ export default {
         return response.data;
       })
       this.text = ""
-    }
+    },
   },
-
 
   components: {
     tagStories: Stories

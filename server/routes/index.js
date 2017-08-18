@@ -42,4 +42,21 @@ router.post("/api/stories/", (req, res) => {
   });
 });
 
+router.post("/api/epics/", (req, res) => {
+  console.log(req.body)
+  Epic.findById(req.params.id, function(err, epic){
+    let newStory = new Story({ text: req.body.text});
+    newStory.save(function(err) {
+      if(err) {
+        res.json({ message: "story not added"});
+      } else {
+        res.json({ text: req.body })
+      }
+  })
+  
+  });
+});
+
 module.exports = router;
+
+

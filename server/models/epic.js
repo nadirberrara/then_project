@@ -11,7 +11,7 @@ const EpicSchema = new Schema({
     required: true
   },
   nextStories: {
-    type: {},
+    type: Array,
     required: true
   },
   userId: {
