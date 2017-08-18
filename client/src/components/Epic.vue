@@ -6,19 +6,19 @@
       <h1> {{ epic.title }} </h1>
       <div>
         <p>{{epic.mainStory}}</p>
-        <strong>then</strong>
+        <strong>then,</strong>
         <p>{{ epic.nextStories}}</p>
         </p>
       </div>
     </div>
   
-    <button v-on:click="addNewStory()" :style="stylesButton">and then</button>
+    <button v-on:click="addNewStory()" v-if="!edit" :style="stylesButton">and then</button>
   
-    <div class="addStory" v-if="edit">
-        <p><i>(do not finish by "then", we do it for you ;))</i></p>
+    <div class="addStory" v-else>
         <strong>then,</strong>        
       <textarea name="newStory" cols="80" rows="3" v-model="text">
       </textarea>
+        <strong>then,</strong>        
       <br>
       <button type="submit" v-on:click="submitNewStory()"> submit my story </button>
     </div>
@@ -28,6 +28,8 @@
         <tag-stories :stories="allStories"> </tag-stories>
       </div>
     </div>
+    
+    <button type="submit" v-on:click="selectRandomStory()" :style="stylesButton"> Select randomly a story </button>
   
   </div>
 </template>
@@ -36,6 +38,9 @@
 import axios from "axios";
 import Stories from "@/components/Stories";
 
+const myAPI = axios.create({
+  baseURL: "http://localhost:3000/api/"
+});
 
 export default {
   name: "hello",
@@ -58,54 +63,41 @@ export default {
     };
   },
   created() {
-    const myAPI = axios.create({
-      baseURL: "http://localhost:3000/api/"
-    });
-
-
-    function getEpic(epicId) {
-      return myAPI.get('/epics/' + epicId).then(response => {
-        return response.data;
-      });
-    }
-
-    getEpic(this.$route.params.epicId).then(epic => {
+    this.getEpic(this.$route.params.epicId).then(epic => {
       this.epic = epic
     });
 
-
-    function getStories() {
-      return myAPI.get("/stories/").then(response => {
-        return response.data;
-      });
-    }
-
-    getStories().then(stories => {
+    this.getStories().then(stories => {
       console.log(stories)
       this.allStories = stories
     })
-
-    // function postStory(text) {
-    //   return myAPI.post("/stories/", { text: text }).then(response => {
-    //     return response.data;
-    //   })
-    // }
-
   },
   methods: {
+
+    getEpic(epicId) {
+      return myAPI.get('/epics/' + epicId).then(response => {
+        return response.data;
+      });
+    },
+        
+    getStories() {
+      return myAPI.get("/stories/").then(response => {
+        return response.data;
+      });
+    },
+
     addNewStory() {
       this.edit = true
     },
     submitNewStory() {
       this.edit = false
-
-      const myAPI = axios.create({
-        baseURL: "http://localhost:3000/api/"
-      });
-
       myAPI.post("/stories/", { text: this.text }).then(response => {
+        this.getStories().then(stories => {
+          this.allStories = stories
+        })
         return response.data;
       })
+      this.text = ""
     }
   },
 

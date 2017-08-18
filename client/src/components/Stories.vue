@@ -6,6 +6,7 @@
                 <p :style="styles">
                 <strong>then,</strong>
                     {{ story.text }}
+                <strong>then,</strong>
                 </p>
             </div>
         </div>
