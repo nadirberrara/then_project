@@ -1,39 +1,52 @@
 <template>
-  <div class="epic">
-  
-    <div v-if="epic && allStories" class="epic" :style="styles">
-      <i>by Nadir </i>
-      <h1> {{ epic.title }} </h1>
-        <div>
+  <section class="hero">
+
+    <div class="">
+
+      <div v-if="epic && allStories" class="epic">
+        <div class="titre">
+          <i>by Nadir </i>
+          <h3 class="title"> {{ epic.title }} </h3>
+          <p>-</p>
           <p>{{epic.mainStory}}</p>
-          <strong>then,</strong>
-            <div>
-              <p v-for="nextStory in epic.nextStories">{{ nextStory }}</p>
-            </div>
-          </p>
         </div>
-    </div>
-  
-    <button v-on:click="addNewStory()" v-if="!edit" :style="stylesButton">and then</button>
-  
-    <div class="addStory" v-else>
-        <strong>then,</strong>        
-      <textarea name="newStory" cols="80" rows="3" v-model="text">
-      </textarea>
-        <strong>then,</strong>        
-      <br>
-      <button type="submit" v-on:click="submitNewStory()"> submit my story </button>
-      <button type="submit" v-on:click="cancelEditing()"> cancel </button>
-    </div>
-  
-    <div class="stories" :style="styles">
-      <div>
-        <tag-stories :stories="allStories" v-on:nextStory="addNext"> </tag-stories>
+
+        <div>
+          <div class="suite">
+            <p v-for="nextStory in epic.nextStories">
+              <span class="blue">
+                then,
+              </span> {{ nextStory }}</p>
+          </div>
+
+        </div>
       </div>
+
+      <div class="column is-gapless">
+        <div v-if="!edit">
+          <div class="stories " :style="styles">
+            <div>
+              <tag-stories :stories="allStories" v-on:nextStory="addNext"> </tag-stories>
+            </div>
+          </div>
+        </div>
+
+        <div class="addStory" v-else>
+          <span class="tag is-primary is-medium">then,</span>
+          <textarea class="textarea is-medium" name="newStory" cols="80" rows="3" v-model="text">
+          </textarea>
+          <span class="tag is-primary is-medium">then,</span>
+          <br><br>
+          <button type="submit" v-on:click="submitNewStory()"> submit my story </button>
+          <button type="submit" v-on:click="cancelEditing()"> cancel </button>
+        </div>
+      </div>
+
     </div>
-    
-  
-  </div>
+    <div v-if="!edit" class="is-white andThenButton">
+      <button v-on:click="addNewStory()" class="button is-large">my then</button>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -53,15 +66,7 @@ export default {
       story: {},
       allStories: [],
       edit: false,
-      styles: {
-        border: "1px solid grey",
-        margin: "20px 80px",
-        padding: "20px"
-      },
-      stylesButton: {
-        padding: "20px",
-        marginBottom: "30px"
-      }
+
     };
   },
   created() {
@@ -84,7 +89,7 @@ export default {
         return response.data;
       });
     },
-        
+
     getStories() {
       return myAPI.get("/stories/").then(response => {
         return response.data;
@@ -120,22 +125,31 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
+span.blue {
+  color: #06425C
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.titre {
+  background-color: #51A39D;
+  color: white;
+  padding: 20px;
+  border: 1px white solid;
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
+.suite {
+  background-color: #CDBB79;
+  color: white;
+  padding: 20px;
+  margin-top: -10px;
+  border: 1px white solid;
 }
 
-a {
-  color: #42b983;
+,
+.andThenButton {
+  margin-top: 10px
+}
+
+h3.title {
+  color: #06425C
 }
 </style>
