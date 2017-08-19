@@ -1,10 +1,12 @@
 <template>
-    <div>
-        <h1>{{msg}}</h1>
-        <ul v-for="epic in epics">
-            <router-link :to="'/epics/' + epic._id"> {{ epic.title }}</router-link>
-        </ul>
-    </div>
+    <section class="hero notification">
+        <div>
+            <h1>{{msg}}</h1>
+            <ul v-for="epic in epics">
+                <router-link :to="'/epics/' + epic._id"> {{ epic.title }}</router-link>
+            </ul>
+        </div>
+    </section>
 </template>
 
 <script>
@@ -41,8 +43,9 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
-h1,
+/* h1,
 h2 {
     font-weight: normal;
 }
@@ -59,5 +62,6 @@ li {
 
 a {
     color: #42b983;
-}
+} */
 </style>
+
