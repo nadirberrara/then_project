@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-  
+
     <!-- <section class="hero is-info is-fullheight is-bold"> -->
-    <div class="hero hero-head" style="color: black;">
+    <div class="hero hero-head">
       <header class="nav">
         <div class="container">
           <div class="nav-left">
@@ -17,7 +17,7 @@
             <span></span>
           </span>
           <div class="nav-right nav-menu">
-            <a href="" class="nav-item is-active">Profile</a>
+            <a href="" class="nav-item">Profile</a>
             <a href="" class="nav-item">Rules</a>
             <a href="" class="nav-item">About</a>
           </div>
@@ -25,15 +25,22 @@
       </header>
     </div>
     <!-- </section> -->
-  
-    <img src="./assets/editing-pen.png">
-  
-    <section class="hero">
-      <router-view></router-view>
+
+    <div class="logo">
+      <img src="./assets/logo3-copie2.png" style="width: 400px">
+    </div>
+
+    <section class="columns">
+      <div class="column is-half is-offset-one-quarter">
+        <router-view></router-view>
+        <hr>
+        <div class="columns">
+          <footer class="column"> @nadir </footer>
+        </div>
+      </div>
+
     </section>
-  
-    <hr>
-    <footer>@nadir </footer>
+
   </div>
 </template>
 
@@ -49,7 +56,23 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-color: #814374;
+  /* color: white */
+}
+
+a.nav-item:not(.button) {
+  color: white
+}
+
+a {
+  color: white
+}
+
+footer.column {
+  color: white
+}
+
+.logo {
+  margin-top: 30px;
 }
 </style>

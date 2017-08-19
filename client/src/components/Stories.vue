@@ -1,39 +1,25 @@
 <template>
-    <section class="hero">
-        <div>
-            <div>
-                <h1 class="title">STORIES SUGGESTED:</h1>
-    
-                <div class="block">
-                    <table class="table is-striped is-bordered">
-                        <tbody>
-                            <strong>then,</strong>
-    
-                            <tr v-for="story in stories">
-                                <th>- {{ story.text }}</th>
-                                <th>
-                                    <button class="button">
-                                        <span class="fa fa-thumbs-o-up"> 0</span>
-                                    </button>
-                                </th>
-                            </tr>
-                            <strong>then,</strong>
-    
-                        </tbody>
-                    </table>
-                </div>
-    
-                <!-- <div v-for="story in stories">
-                                                                                            <p>
-                                                                                                <strong>then,</strong>
-                                                                                                {{ story.text }}
-                                                                                                <strong>then,</strong>
-                                                                                            </p>
-                                                                                        </div> -->
-            </div>
-            <!-- <button type="submit" v-on:click="selectRandomStory()"> Select randomly a story </button> -->
+    <div class="hero">
+
+        <div class="block scroll">
+            <table class="table">
+                <tbody>
+                    <tr v-for="story in stories">
+                        <strong></strong>
+                        <th>then, {{ story.text }}</th>
+                        <th>
+                            <button class="button">
+                                <span class="fa fa-thumbs-o-up"> 0</span>
+                            </button>
+                        </th>
+                    </tr>
+                </tbody>
+
+            </table>
+            <button class="button" type="submit" v-on:click="selectRandomStory()"> Select randomly a story </button>
+
         </div>
-    </section>
+    </div>
 </template>
 
 <script>
@@ -73,3 +59,28 @@ export default {
 };
 </script>
 
+<style scoped>
+.block {}
+
+.table {
+    background-color: #CDBB79;
+    color: white;
+    overflow-y: scroll;
+    display: block;
+    border: 1px white solid;
+}
+
+.scroll {
+    width: 100%;
+    height: 250px;
+    overflow-y: scroll;
+}
+
+th {
+    color: #06425C
+}
+
+h3.title {
+    color: #06425C
+}
+</style>
