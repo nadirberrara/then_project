@@ -2,11 +2,14 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 const StorySchema = new Schema({
-  epicId: {
-    type: Object
+  epic: {
+    type: Schema.Types.ObjectId,
+    ref: "Epic",
+    required: true
   },
   text: {
-    type: String
+    type: String,
+    required: true
   },
   isSelected: {
     type: Boolean

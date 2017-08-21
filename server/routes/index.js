@@ -24,14 +24,14 @@ router.get("/api/epics/:id", (req, res, next) => {
   });
 });
 
-router.get("/api/stories/", (req, res, next) => {
-  Story.find(req.params, function(err, story) {
+router.get("/api/epics/:epicId/stories/", (req, res, next) => {
+  Story.find({}, function(err, story) {
     if (err) res.json("story not find");
     else res.json(story);
   });
 });
 
-router.post("/api/stories/", (req, res) => {
+router.post("/api/epics/:epicId/stories/", (req, res) => {
   let myStory = new Story({ text: req.body.text });
   myStory.save(function(err) {
     if (err) {
@@ -42,21 +42,39 @@ router.post("/api/stories/", (req, res) => {
   });
 });
 
-router.post("/api/epics/", (req, res) => {
-  console.log(req.body)
-  Epic.findById(req.params.id, function(err, epic){
-    let newStory = new Story({ text: req.body.text});
-    newStory.save(function(err) {
-      if(err) {
-        res.json({ message: "story not added"});
-      } else {
-        res.json({ text: req.body })
-      }
-  })
-  
-  });
+// router.put("/api/epics/:id", function(req, res) {
+//   Epic.findOneAndUpdate(
+//     {
+//       _id: req.paramas.id
+//     },
+//     {
+//       $set : { "nextStories" : }
+//     },
+//     function(err) {
+//       if (err) {
+//         res.json({ message: "error updating title" });
+//       } else {
+//         res.json({ text: req.body });
+//       }
+//     }
+//   );
+// });
+
+// router.put("/api/epics/:id", function(req, res) {
+//   Epic.update(
+//     { _id: epics._id },
+//     { $push: { nextStories: newStory } },
+//     { safe: true, upsert: true },
+//     function(err, newStory) {
+//       if (err) {
+//         res.json({ message: "error updating nexStories" });
+//       }
+//     }
+//   );
+// });
+
+router.post("/api/epics/:id/nextStories", function(req, res) {
+  let newNextStory = new Story();
 });
 
 module.exports = router;
-
-
