@@ -91,7 +91,8 @@ export default {
     },
 
     getStories() {
-      return myAPI.get("/epics/" + this.epic._id + "/stories").then(response => {
+      console.log("this.$route", this.$route);
+      return myAPI.get("/epics/" + this.$route.params.epicId + "/stories").then(response => {
         return response.data;
       });
     },

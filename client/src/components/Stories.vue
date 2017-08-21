@@ -16,7 +16,7 @@
                 </tbody>
 
             </table>
-            <button class="button" type="submit" v-on:click="selectRandomStory()"> Select randomly a story </button>
+            <!-- <button class="button" type="submit" v-on:click="selectRandomStory()"> Select randomly a story </button> -->
 
         </div>
     </div>

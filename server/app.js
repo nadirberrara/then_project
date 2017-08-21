@@ -6,8 +6,13 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/thenProject");
-
-var index = require("./routes/index");
+const index = require("./routes/index");
+const authRoutes = require("./routes/auth");
+const passport = require("passport");
+const User = require("./models/user");
+const config = require("./config");
+const { Strategy, ExtractJwt } = require("passport-jwt");
+const cors = require("cors");
 
 var app = express();
 
@@ -17,19 +22,60 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
-  );
+app.use(
+  cors({
+    origin: "http://localhost:8080"
+  })
+);
 
-  next();
+// DEBUT DE L'AUTHENTIFICATION
+
+passport.initialize();
+const strategy = new Strategy(
+  {
+    secretOrKey: config.jwtSecret,
+
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+  },
+  (payload, done) => {
+    User.findById(payload.id).then(user => {
+      if (user) {
+        done(null, user);
+      } else {
+        done(new Error("User not found"));
+      }
+    });
+  }
+);
+passport.use(strategy);
+
+//protecting routes
+app.use("/api", (req, res, next) => {
+  const authenticate = passport.authenticate(
+    "jwt",
+    config.jwtSession,
+    (err, user, fail) => {
+      req.user = user;
+      next(err);
+    }
+  );
+  authenticate(req, res, next);
 });
 
+app.get("/api/me", (req, res) => {
+  if (req.user) {
+    res.json(req.user);
+  } else {
+    res.json({
+      message: "You're not connected"
+    });
+  }
+});
+
+// FIN DE L'AUTHENTIFICATION
+
 app.use("/", index);
+app.use("/api", authRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -40,13 +86,12 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
   // json the error page
   res.status(err.status || 500);
-  res.json("error");
+  res.json({
+    message: err.message,
+    error: req.app.get("env") === "development" ? err : {}
+  });
 });
 
 module.exports = app;

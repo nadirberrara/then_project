@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/thenProject");
+var Schema = mongoose.Schema;
 
 var Epic = require("../models/epic.js");
 var Story = require("../models/story.js");
@@ -25,20 +26,42 @@ router.get("/api/epics/:id", (req, res, next) => {
 });
 
 router.get("/api/epics/:epicId/stories/", (req, res, next) => {
-  Story.find({}, function(err, story) {
+  var epicId = req.params.epicId;
+  Story.find({ epic: epicId }, function(err, story) {
     if (err) res.json("story not find");
     else res.json(story);
   });
 });
 
 router.post("/api/epics/:epicId/stories/", (req, res) => {
-  let myStory = new Story({ text: req.body.text });
-  myStory.save(function(err) {
+  console.log("req.params.epicId", req.params.epicId);
+  console.log("req.body.text", req.body.text);
+  let myStory = new Story({
+    text: req.body.text,
+    epic: req.params.epicId
+  });
+  console.log("myStory", myStory);
+  myStory.save(function(err, doc) {
     if (err) {
-      res.json({ message: "story not created" });
+      res.json({
+        message: "story not created",
+        err: err
+      });
     } else {
       res.json({ text: req.body });
     }
+  });
+});
+
+router.post("/api/epics/", (req, res) => {
+  let myEpic = new Epic({
+    title: req.body.title,
+    mainStory: req.body.mainStory,
+    nextStories: []
+  });
+  myEpic.save(err => {
+    if (err) res.json(err);
+    else res.json("OK");
   });
 });
 
