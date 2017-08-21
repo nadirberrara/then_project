@@ -46,8 +46,14 @@
 </template>
 
 <script>
+import auth from './components/api'
 export default {
-  name: 'app'
+  name: 'app',
+  created() {
+    // Try to load the user when the app is loaded
+    // This happens only once
+    auth.loadUser(this)
+  }
 }
 </script>
 

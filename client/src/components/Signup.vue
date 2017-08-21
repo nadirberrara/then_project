@@ -1,34 +1,79 @@
 <template>
     <div>
-
-        <h1 class="title"> SIGN UP </h1>
+        <article v-if="error" class="message is-danger">
+            <div class="message-body">{{ error }}</div>
+        </article>
 
         <div class="field">
-            <label class="label">Name</label>
+            <label class="label">Username</label>
             <div class="control">
-                <input class="input" type="text" placeholder="name">
+                <input class="input" v-model="username" type="text">
             </div>
         </div>
 
         <div class="field">
-            <label class="label">Email</label>
-            <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="email" value="">
-                <span class="icon is-small is-left">
-                    <i class="fa fa-envelope"></i>
-                </span>
+            <label class="label">Name</label>
+            <div class="control">
+                <input class="input" type="text">
             </div>
         </div>
 
         <div class="field">
             <label class="label">Password</label>
-            <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="password" value="">
-                <span class="icon is-small is-left">
-                    <i class="fa fa-key"></i>
-                </span>
+            <div class="control">
+                <input class="input" v-model="password" type="password">
             </div>
         </div>
 
+        <pre>{{ response }}</pre>
+        <button @click="signup" class="button is-primary">Signup</button>
+        <button @click="login" class="button is-success">Login</button>
+        <button @click="logout" class="button is-danger">Logout</button>
+        <button @click="secret" class="button is-warning">Secret</button>
     </div>
 </template>
+
+<script>
+import auth from './api'
+
+export default {
+    data() {
+        return {
+            response: '',
+            username: '',
+            password: '',
+            error: ''
+        }
+    },
+    methods: {
+        signup() {
+            this.error = ''
+            auth.signup({
+                username: this.username,
+                password: this.password
+            }).then((response) => {
+                this.response = response
+            }).catch(err => {
+                this.error = err.response.data
+            })
+        },
+        login() {
+            auth.login(this.username, this.password, this).then((response) => {
+                this.response = response
+            }).catch(err => {
+                this.error = err
+            })
+        },
+        secret() {
+            auth.secret().then(response => {
+                this.response = response
+            }).catch(err => {
+                this.response = err
+            })
+        },
+        logout() {
+            auth.logout(this)
+        }
+    }
+}
+</script>

@@ -1,10 +1,10 @@
 <template>
-    <div class="hero">
+    <div class="">
 
         <div class="block scroll">
-            <table class="table">
-                <tbody>
-                    <tr v-for="story in stories">
+            <table class="table" v-for="story in stories">
+                <tbody :style="styles">
+                    <tr>
                         <strong></strong>
                         <th>then, {{ story.text }}</th>
                         <th>
@@ -34,7 +34,9 @@ export default {
     props: ["stories", "epicId"],
     data() {
         return {
-
+            styles: {
+                "word-break": "break-word"
+            }
         }
     },
 
