@@ -89,6 +89,7 @@ li {
     padding: 30px;
     border: 1px solid white;
     background-color: #06425C;
+    border-radius: 10px
 }
 
 .title {
@@ -96,14 +97,16 @@ li {
     padding: 20px;
     color: white;
     border: 1px solid white;
-    background-color: #CDBB79
+    background-color: #CDBB79;
+    border-radius: 10px
 }
 
 .card {
     margin: 30px;
-    background-color: #51A39D;
+    background-color: #814374;
     color: white;
-    border: white 1px solid
+    border: white 1px solid;
+    border-radius: 10px
 }
 
 p.card-header-title {

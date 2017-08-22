@@ -77,3 +77,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+label.label {
+    color: #06425c
+}
+</style>

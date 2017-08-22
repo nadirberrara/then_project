@@ -24,7 +24,7 @@
 
       <div class="column is-gapless">
         <div v-if="!edit">
-          <div class="stories ">
+          <div class="stories">
             <div>
               <tag-stories :stories="allStories" :epicId="epic._id" v-on:nextStory="addNext"> </tag-stories>
             </div>

@@ -60,11 +60,11 @@ export default {
 
 <style scoped>
 h1.title {
-    color: white
+    color: #06425c
 }
 
 p {
-    color: white
+    color: #06425c
 }
 
 .container {
@@ -75,6 +75,16 @@ p {
 .story {
     margin: 30px
 }
+
+button.button.submit {
+    color: #06425c
+}
+
+
+
+
+
+/* color blue: #06425c */
 </style>
 
 

@@ -66,8 +66,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-color: #814374;
-  /* color: white */
+  /* background-color: rgba(129, 67, 116, 0.5); */
+  background: url("./assets/background1.jpg") no-repeat fixed;
+  background-size: cover;
 }
 
 a.nav-item:not(.button) {
