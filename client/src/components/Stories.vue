@@ -8,10 +8,10 @@
                         <strong></strong>
                         <th>then, {{ story.text }}</th>
                         <!-- <th>
-                                    <button class="button is-right">
-                                        <span class="fa fa-thumbs-o-up"> 0</span>
-                                    </button>
-                                </th> -->
+                                        <button class="button is-right">
+                                            <span class="fa fa-thumbs-o-up"> 0</span>
+                                        </button>
+                                    </th> -->
 
                     </tr>
                 </tbody>
@@ -28,7 +28,7 @@ import axios from "axios";
 import Stories from "@/components/Stories";
 
 const myAPI = axios.create({
-    baseURL: "http://localhost:3000/api/"
+    baseUrl: process.env.NODE_ENV === "production" ? '/api' : "http://localhost:3000/api"
 });
 
 export default {

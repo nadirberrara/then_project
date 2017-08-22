@@ -27,7 +27,7 @@
 
 import axios from "axios";
 const myAPI = axios.create({
-    baseURL: "http://localhost:3000/api/"
+    baseUrl: process.env.NODE_ENV === "production" ? '/api' : "http://localhost:3000/api"
 });
 
 

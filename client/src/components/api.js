@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const auth = axios.create({
-  baseURL: "http://localhost:3000/api"
+  baseUrl:
+    process.env.NODE_ENV === "production" ? "/api" : "http://localhost:3000/api"
 });
 
 function signup(user) {

@@ -54,7 +54,7 @@ import axios from "axios";
 import Stories from "@/components/Stories";
 
 const myAPI = axios.create({
-  baseURL: "http://localhost:3000/api/"
+  baseUrl: process.env.NODE_ENV === "production" ? '/api' : "http://localhost:3000/api"
 });
 
 export default {
