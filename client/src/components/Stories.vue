@@ -7,11 +7,11 @@
                     <tr>
                         <strong></strong>
                         <th>then, {{ story.text }}</th>
-                        <!-- <th>
-                                            <button class="button is-right">
-                                                <span class="fa fa-thumbs-o-up"> 0</span>
-                                            </button>
-                                        </th> -->
+                        <th class="is-pulled-right">
+                            <button class="button is-right">
+                                <span class="fa fa-thumbs-o-up"> 0</span>
+                            </button>
+                        </th>
 
                     </tr>
                 </tbody>

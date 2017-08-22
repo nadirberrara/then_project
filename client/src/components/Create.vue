@@ -84,7 +84,14 @@ button.button.submit {
 
 
 
-/* color blue: #06425c */
+
+
+
+
+/* color blue: #06425c 
+color: purple: #814374
+color: turquoise #51A39D
+color: beige #CDBB79*/
 </style>
 
 

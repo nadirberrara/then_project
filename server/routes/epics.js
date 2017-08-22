@@ -3,8 +3,7 @@ var router = express.Router();
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/thenProject");
 var Schema = mongoose.Schema;
-var cron = require("node-cron");
-
+var { ObjectId } = mongoose.Types;
 var Epic = require("../models/epic.js");
 var Story = require("../models/story.js");
 
@@ -63,17 +62,16 @@ router.post("/:epicId/add-random-story", (req, res) => {
   Epic.findById(req.params.epicId, function(err, epic) {
     Story.find(
       {
-        epicId: req.params.epicId
+        epic: ObjectId(req.params.epicId)
       },
       function(err, stories) {
         if (err) {
           res.status(400).json("stories not find");
         } else {
-          console.log(stories);
-          const randomIndex =
+          const randomStory =
             stories[Math.floor(Math.random() * stories.length)];
 
-          epic.nextStories.push(stories[randomIndex]);
+          epic.nextStories.push(randomStory.text);
           epic.save(function(err, doc) {
             if (err) res.json(err);
             else res.json(epic);

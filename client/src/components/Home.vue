@@ -12,10 +12,10 @@
                     <h1>Rules :</h1>
 
                     <li>Login or Signup</li>
-                    <li>Select a Story</li>
-                    <li>Read and vote for your favorite propositions</li>
-                    <li>Come back at 8am and pm</li>
-                    <li>Create your own story and share with your friends</li>
+                    <li>Select a Story : Read & Vote</li>
+                    <li>Create your own story</li>
+                    <li>Be there at 8 for updates</li>
+                    <li>Share with friends</li>
 
                 </div>
             </div>
@@ -28,17 +28,19 @@
 
         <div class="hero ">
             <h1 class="title ">
-                <span class="fa fa-arrow-down "></span> Participate a Story
-                <span class="fa fa-arrow-down "></span>
+                <p>Participate a Story</p>
+                <span class="fa fa-arrow-down icon is-large"></span>
             </h1>
             <li v-for="epic in epics ">
                 <router-link :to=" '/epics/' + epic._id ">{{ epic.title }}</router-link>
             </li>
             <h1 class="title ">
+                <span class="fa fa-arrow-down "></span>
+                <p>
+                    <router-link to="/create">Create your Story
+                    </router-link>
+                </p>
 
-                <span class="fa fa-arrow-right "></span>
-                <a href="localhost:8080/create ">Or Create your Own Story </a>
-                <span class="fa fa-arrow-left "></span>
             </h1>
 
         </div>
@@ -88,7 +90,7 @@ li {
     margin: 30px;
     padding: 30px;
     border: 1px solid white;
-    background-color: #06425C;
+    background-color: rgba(6, 66, 92, 0.9);
     border-radius: 10px
 }
 
@@ -103,7 +105,9 @@ li {
 
 .card {
     margin: 30px;
-    background-color: #814374;
+    background-color: rgba(129, 67, 116, 0.9);
+    ;
+
     color: white;
     border: white 1px solid;
     border-radius: 10px

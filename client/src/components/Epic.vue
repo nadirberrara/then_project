@@ -21,7 +21,9 @@
 
         </div>
       </div>
-
+      <div v-if="!edit" class="is-white andThenButton">
+        <button v-on:click="addNewStory()" class="button is-large">my then</button>
+      </div>
       <div class="column is-gapless">
         <div v-if="!edit">
           <div class="stories">
@@ -43,9 +45,7 @@
       </div>
 
     </div>
-    <div v-if="!edit" class="is-white andThenButton">
-      <button v-on:click="addNewStory()" class="button is-large">my then</button>
-    </div>
+
   </section>
 </template>
 
@@ -131,14 +131,14 @@ span.blue {
 }
 
 .titre {
-  background-color: #51A39D;
+  background-color: rgba(81, 163, 157, 0.9);
   color: white;
   padding: 20px;
   border: 1px white solid;
 }
 
 .suite {
-  background-color: #CDBB79;
+  background-color: rgba(205, 187, 121, 0.9);
   color: white;
   padding: 20px;
   margin-top: -10px;
@@ -159,7 +159,7 @@ h3.title {
 }
 
 .tag {
-  background-color: #CDBB79;
+  background-color: rgba(205, 187, 121, 0.9);
   color: white;
   border: white solid 1px
 }

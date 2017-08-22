@@ -31,7 +31,7 @@
     <!-- </section> -->
 
     <div class="logo">
-      <img src="./assets/logo3-copie2.png" style="width: 400px">
+      <img src="./assets/logo5version2.png" style="width: 400px">
     </div>
 
     <section class="">
