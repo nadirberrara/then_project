@@ -23,7 +23,7 @@
             </a>
             <a href="http://localhost:8080/#/signup" class="nav-item">Signup</a>
             <a href="http://localhost:8080/#/login" v-if="$root.user" class="nav-item">Login</a>
-            <a href="http://localhost:8080/#/rules" class="nav-item">Rules</a>
+            <a href="http://localhost:8080/#/" class="nav-item">About</a>
           </div>
         </div>
       </header>
@@ -34,12 +34,12 @@
       <img src="./assets/logo3-copie2.png" style="width: 400px">
     </div>
 
-    <section class="columns">
-      <div class="column is-half is-offset-one-quarter">
+    <section class="">
+      <div class="">
         <router-view></router-view>
         <hr>
-        <div class="columns">
-          <footer class="column"> @nadir </footer>
+        <div class="">
+          <footer> @ Nadir BERRARA / IH Jun17 </footer>
         </div>
       </div>
 
@@ -84,5 +84,10 @@ footer.column {
 
 .logo {
   margin-top: 30px;
+}
+
+footer {
+  color: white;
+  padding-bottom: 20px
 }
 </style>

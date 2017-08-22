@@ -1,21 +1,23 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="title">
-            CREATE YOUR
+            CREATE YOUR STORY
         </h1>
 
         <div v-if="bravo" class="notification is-primary">
             Your story was added successfully
         </div>
+        <div v-if="danger" class="notification is-danger">
+            Informations missing
+        </div>
         <div>
             <p>Choose a title :</p>
             <input type="text" class="button is-large" v-model="title">
         </div>
-        <div>
-            <p>Start your :</p>
+        <div class="story">
+            <p>Start your story:</p>
             <textarea name="" id="" cols="30" rows="2" class="textarea is-medium" placeholder="" v-model="text"></textarea>
         </div>
-        <br>
         <div>
             <button class="button submit" v-on:click="createNewEpic()">Submit my story</button>
         </div>
@@ -36,7 +38,8 @@ export default {
             title: "",
             text: "",
             epic: "",
-            bravo: false
+            bravo: false,
+            danger: false
         }
     },
     methods: {
@@ -53,31 +56,26 @@ export default {
 }
 
 
-
-
-
-// data() {
-//     return {
-//         text: '',
-//         epic: {},
-//         allStories: [],
-
-//     };
-// },
-
-// submitNew() {
-//     this.edit = false
-//     myAPI.post("/epics/" + this.epic._id + "/stories", { text: this.text }).then(response => {
-//         this.getStories().then(stories => {
-//             this.allStories = stories
-//         })
-//         return response.data;
-//     })
-//     this.text = ""
-// },
-//   },
-
 </script>
+
+<style scoped>
+h1.title {
+    color: white
+}
+
+p {
+    color: white
+}
+
+.container {
+    height: auto;
+    margin-top: 30px
+}
+
+.story {
+    margin: 30px
+}
+</style>
 
 
 

@@ -32,10 +32,10 @@
         </div>
 
         <div class="addStory" v-else>
-          <span class="tag is-primary is-medium">then,</span>
+          <span class="tag is-medium">then,</span>
           <textarea class="textarea is-medium" name="newStory" cols="80" rows="3" v-model="text">
           </textarea>
-          <span class="tag is-primary is-medium">then,</span>
+          <span class="tag is-medium">then,</span>
           <br><br>
           <button class="button" type="submit" v-on:click="submitNewStory()"> submit my story </button>
           <button class="button" type="submit" v-on:click="cancelEditing()"> cancel </button>
@@ -152,5 +152,15 @@ span.blue {
 
 h3.title {
   color: #06425C
+}
+
+.epic {
+  margin: 13px
+}
+
+.tag {
+  background-color: #CDBB79;
+  color: white;
+  border: white solid 1px
 }
 </style>

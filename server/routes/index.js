@@ -63,20 +63,28 @@ router.post("/api/epics/", (req, res) => {
   });
 });
 
-router.post("/epics/:epicId/addRandomStory", (req, res) => {
+router.post("/api/epics/:epicId/add-random-story", (req, res) => {
   Epic.findById(req.params.epicId, function(err, epic) {
     Story.find(
       {
         epicId: req.params.epicId
       },
       function(err, stories) {
-        if (err) res.json("stories not find");
-        else res.json(stories);
+        if (err) {
+          res.status(400).json("stories not find");
+        } else {
+          console.log(stories);
+          const randomIndex =
+            stories[Math.floor(Math.random() * stories.length)];
+
+          epic.nextStories.push(stories[randomIndex]);
+          epic.save(function(err, doc) {
+            if (err) res.json(err);
+            else res.json(epic);
+          });
+        }
       }
-    ).nextStory.save(function(err, doc) {
-      if (err) res.json(err);
-      else res.json("Next story added with success");
-    });
+    );
   });
 });
 
