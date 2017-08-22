@@ -2,9 +2,11 @@
     <section class="hero">
         <div>
             <h1 class="title white">STORIES :</h1>
-            <span v-for="epic in epics">
-                <router-link :to="'/epics/' + epic._id">- {{ epic.title }}</router-link>
-            </span>
+
+            <li v-for="epic in epics">
+                <router-link :to="'/epics/' + epic._id">{{ epic.title }}</router-link>
+            </li>
+
         </div>
     </section>
 </template>

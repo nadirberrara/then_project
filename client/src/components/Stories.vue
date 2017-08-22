@@ -1,22 +1,23 @@
 <template>
-    <div class="hero">
+    <div class="">
 
         <div class="block scroll">
-            <table class="table">
-                <tbody>
-                    <tr v-for="story in stories">
+            <table class="table" v-for="story in stories">
+                <tbody :style="styles">
+                    <tr>
                         <strong></strong>
                         <th>then, {{ story.text }}</th>
-                        <th>
-                            <button class="button">
-                                <span class="fa fa-thumbs-o-up"> 0</span>
-                            </button>
-                        </th>
+                        <!-- <th>
+                                    <button class="button is-right">
+                                        <span class="fa fa-thumbs-o-up"> 0</span>
+                                    </button>
+                                </th> -->
+
                     </tr>
                 </tbody>
 
             </table>
-            <button class="button" type="submit" v-on:click="selectRandomStory()"> Select randomly a story </button>
+            <!-- <button class="button" type="submit" v-on:click="selectRandomStory()"> Select randomly a story </button> -->
 
         </div>
     </div>
@@ -31,26 +32,21 @@ const myAPI = axios.create({
 });
 
 export default {
-    props: ["stories"],
+    props: ["stories", "epicId"],
     data() {
         return {
-            //         styles: {
-            //             border: "1px solid grey",
-            //             padding: "20px"
-            //         },
-            //         stylesButton: {
-            //             padding: "20px",
-            //             marginBottom: "30px"
-            //   }
+            styles: {
+                "word-break": "break-word"
+            }
         }
     },
 
     methods: {
         selectRandomStory() {
             var randomStory = this.stories[Math.floor(Math.random() * this.stories.length)]
-            this.$emit("nextStory", randomStory.text)
 
-            myAPI.post("/epics/" + epicId, { text: this.randomStory.text }).then(response => {
+
+            myAPI.post("/epics/" + this.epicId + "/stories", { text: randomStory.text }).then(response => {
                 return this.randomStory
             })
         }
@@ -77,10 +73,6 @@ export default {
 }
 
 th {
-    color: #06425C
-}
-
-h3.title {
     color: #06425C
 }
 </style>

@@ -24,9 +24,9 @@
 
       <div class="column is-gapless">
         <div v-if="!edit">
-          <div class="stories " :style="styles">
+          <div class="stories ">
             <div>
-              <tag-stories :stories="allStories" v-on:nextStory="addNext"> </tag-stories>
+              <tag-stories :stories="allStories" :epicId="epic._id" v-on:nextStory="addNext"> </tag-stories>
             </div>
           </div>
         </div>
@@ -37,8 +37,8 @@
           </textarea>
           <span class="tag is-primary is-medium">then,</span>
           <br><br>
-          <button type="submit" v-on:click="submitNewStory()"> submit my story </button>
-          <button type="submit" v-on:click="cancelEditing()"> cancel </button>
+          <button class="button" type="submit" v-on:click="submitNewStory()"> submit my story </button>
+          <button class="button" type="submit" v-on:click="cancelEditing()"> cancel </button>
         </div>
       </div>
 
@@ -91,7 +91,8 @@ export default {
     },
 
     getStories() {
-      return myAPI.get("/stories/").then(response => {
+      console.log("this.$route", this.$route);
+      return myAPI.get("/epics/" + this.$route.params.epicId + "/stories").then(response => {
         return response.data;
       });
     },
@@ -106,7 +107,7 @@ export default {
 
     submitNewStory() {
       this.edit = false
-      myAPI.post("/stories/", { text: this.text }).then(response => {
+      myAPI.post("/epics/" + this.epic._id + "/stories", { text: this.text }).then(response => {
         this.getStories().then(stories => {
           this.allStories = stories
         })

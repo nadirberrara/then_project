@@ -11,12 +11,12 @@ const EpicSchema = new Schema({
     required: true
   },
   nextStories: {
-    type: Array,
-    required: true
+    type: Array
+    // required: true
   },
   userId: {
-    type: Array,
-    required: true
+    type: Schema.Types.ObjectId
+    // required: true
   }
 });
 

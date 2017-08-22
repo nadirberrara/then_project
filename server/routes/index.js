@@ -2,6 +2,8 @@ var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/thenProject");
+var Schema = mongoose.Schema;
+var cron = require("node-cron");
 
 var Epic = require("../models/epic.js");
 var Story = require("../models/story.js");
@@ -24,18 +26,25 @@ router.get("/api/epics/:id", (req, res, next) => {
   });
 });
 
-router.get("/api/stories/", (req, res, next) => {
-  Story.find(req.params, function(err, story) {
+router.get("/api/epics/:epicId/stories/", (req, res, next) => {
+  var epicId = req.params.epicId;
+  Story.find({ epic: epicId }, function(err, story) {
     if (err) res.json("story not find");
     else res.json(story);
   });
 });
 
-router.post("/api/stories/", (req, res) => {
-  let myStory = new Story({ text: req.body.text });
-  myStory.save(function(err) {
+router.post("/api/epics/:epicId/stories/", (req, res) => {
+  let myStory = new Story({
+    text: req.body.text,
+    epic: req.params.epicId
+  });
+  myStory.save(function(err, doc) {
     if (err) {
-      res.json({ message: "story not created" });
+      res.json({
+        message: "story not created",
+        err: err
+      });
     } else {
       res.json({ text: req.body });
     }
@@ -43,20 +52,32 @@ router.post("/api/stories/", (req, res) => {
 });
 
 router.post("/api/epics/", (req, res) => {
-  console.log(req.body)
-  Epic.findById(req.params.id, function(err, epic){
-    let newStory = new Story({ text: req.body.text});
-    newStory.save(function(err) {
-      if(err) {
-        res.json({ message: "story not added"});
-      } else {
-        res.json({ text: req.body })
+  let myEpic = new Epic({
+    title: req.body.title,
+    mainStory: req.body.mainStory,
+    nextStories: []
+  });
+  myEpic.save(err => {
+    if (err) res.json(err);
+    else res.json("OK");
+  });
+});
+
+router.post("/epics/:epicId/addRandomStory", (req, res) => {
+  Epic.findById(req.params.epicId, function(err, epic) {
+    Story.find(
+      {
+        epicId: req.params.epicId
+      },
+      function(err, stories) {
+        if (err) res.json("stories not find");
+        else res.json(stories);
       }
-  })
-  
+    ).nextStory.save(function(err, doc) {
+      if (err) res.json(err);
+      else res.json("Next story added with success");
+    });
   });
 });
 
 module.exports = router;
-
-
