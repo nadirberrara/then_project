@@ -4,6 +4,7 @@ import Epic from "@/components/Epic";
 import Home from "@/components/Home";
 import Login from "@/components/Login";
 import Signup from "@/components/Signup";
+import Create from "@/components/Create";
 import Rules from "@/components/Rules";
 
 Vue.use(Router);
@@ -34,6 +35,11 @@ export default new Router({
       path: "/rules",
       name: "Rules",
       component: Rules
+    },
+    {
+      path: "/create",
+      name: "Create",
+      component: Create
     }
   ]
 });

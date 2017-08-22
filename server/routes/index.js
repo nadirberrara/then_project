@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/thenProject");
 var Schema = mongoose.Schema;
+var cron = require("node-cron");
 
 var Epic = require("../models/epic.js");
 var Story = require("../models/story.js");
@@ -34,13 +35,10 @@ router.get("/api/epics/:epicId/stories/", (req, res, next) => {
 });
 
 router.post("/api/epics/:epicId/stories/", (req, res) => {
-  console.log("req.params.epicId", req.params.epicId);
-  console.log("req.body.text", req.body.text);
   let myStory = new Story({
     text: req.body.text,
     epic: req.params.epicId
   });
-  console.log("myStory", myStory);
   myStory.save(function(err, doc) {
     if (err) {
       res.json({
@@ -65,39 +63,21 @@ router.post("/api/epics/", (req, res) => {
   });
 });
 
-// router.put("/api/epics/:id", function(req, res) {
-//   Epic.findOneAndUpdate(
-//     {
-//       _id: req.paramas.id
-//     },
-//     {
-//       $set : { "nextStories" : }
-//     },
-//     function(err) {
-//       if (err) {
-//         res.json({ message: "error updating title" });
-//       } else {
-//         res.json({ text: req.body });
-//       }
-//     }
-//   );
-// });
-
-// router.put("/api/epics/:id", function(req, res) {
-//   Epic.update(
-//     { _id: epics._id },
-//     { $push: { nextStories: newStory } },
-//     { safe: true, upsert: true },
-//     function(err, newStory) {
-//       if (err) {
-//         res.json({ message: "error updating nexStories" });
-//       }
-//     }
-//   );
-// });
-
-router.post("/api/epics/:id/nextStories", function(req, res) {
-  let newNextStory = new Story();
+router.post("/epics/:epicId/addRandomStory", (req, res) => {
+  Epic.findById(req.params.epicId, function(err, epic) {
+    Story.find(
+      {
+        epicId: req.params.epicId
+      },
+      function(err, stories) {
+        if (err) res.json("stories not find");
+        else res.json(stories);
+      }
+    ).nextStory.save(function(err, doc) {
+      if (err) res.json(err);
+      else res.json("Next story added with success");
+    });
+  });
 });
 
 module.exports = router;

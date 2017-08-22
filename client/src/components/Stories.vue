@@ -7,11 +7,12 @@
                     <tr>
                         <strong></strong>
                         <th>then, {{ story.text }}</th>
-                        <th>
-                            <button class="button">
-                                <span class="fa fa-thumbs-o-up"> 0</span>
-                            </button>
-                        </th>
+                        <!-- <th>
+                                    <button class="button is-right">
+                                        <span class="fa fa-thumbs-o-up"> 0</span>
+                                    </button>
+                                </th> -->
+
                     </tr>
                 </tbody>
 
@@ -43,6 +44,7 @@ export default {
     methods: {
         selectRandomStory() {
             var randomStory = this.stories[Math.floor(Math.random() * this.stories.length)]
+
 
             myAPI.post("/epics/" + this.epicId + "/stories", { text: randomStory.text }).then(response => {
                 return this.randomStory

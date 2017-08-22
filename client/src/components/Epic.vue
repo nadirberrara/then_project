@@ -37,8 +37,8 @@
           </textarea>
           <span class="tag is-primary is-medium">then,</span>
           <br><br>
-          <button type="submit" v-on:click="submitNewStory()"> submit my story </button>
-          <button type="submit" v-on:click="cancelEditing()"> cancel </button>
+          <button class="button" type="submit" v-on:click="submitNewStory()"> submit my story </button>
+          <button class="button" type="submit" v-on:click="cancelEditing()"> cancel </button>
         </div>
       </div>
 

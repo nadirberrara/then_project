@@ -11,16 +11,19 @@
               <!-- <img src="" alt=""> -->
             </a>
           </div>
+
           <span class="nav-toggle">
             <span></span>
             <span></span>
             <span></span>
           </span>
           <div class="nav-right nav-menu">
+            <a href="http://localhost:8080/#/create" class="nav-item">
+              New Story
+            </a>
             <a href="http://localhost:8080/#/signup" class="nav-item">Signup</a>
             <a href="http://localhost:8080/#/login" v-if="$root.user" class="nav-item">Login</a>
             <a href="http://localhost:8080/#/rules" class="nav-item">Rules</a>
-            <a href="" class="nav-item">About</a>
           </div>
         </div>
       </header>
