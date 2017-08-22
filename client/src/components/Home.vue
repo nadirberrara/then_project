@@ -20,24 +20,25 @@
                 </div>
             </div>
             <footer class="card-footer">
-                <a href="http://localhost:8080/#/signup" class="card-footer-item">Signup</a>
-                <a href="" class="card-footer-item">Login</a>
+                <router-link to="/signup" class="card-footer-item ">Signup</router-link>
+
+                <a href=" " class="card-footer-item ">Login</a>
             </footer>
         </div>
 
-        <div class="hero">
-            <h1 class="title">
-                <span class="fa fa-arrow-down"></span> Participate a Story
-                <span class="fa fa-arrow-down"></span>
+        <div class="hero ">
+            <h1 class="title ">
+                <span class="fa fa-arrow-down "></span> Participate a Story
+                <span class="fa fa-arrow-down "></span>
             </h1>
-            <li v-for="epic in epics">
-                <router-link :to="'/epics/' + epic._id">{{ epic.title }}</router-link>
+            <li v-for="epic in epics ">
+                <router-link :to=" '/epics/' + epic._id ">{{ epic.title }}</router-link>
             </li>
-            <h1 class="title">
+            <h1 class="title ">
 
-                <span class="fa fa-arrow-right"></span>
-                <a href="localhost:8080/create">Or Create your Own Story </a>
-                <span class="fa fa-arrow-left"></span>
+                <span class="fa fa-arrow-right "></span>
+                <a href="localhost:8080/create ">Or Create your Own Story </a>
+                <span class="fa fa-arrow-left "></span>
             </h1>
 
         </div>
@@ -57,7 +58,7 @@ export default {
     },
     created() {
         const myAPI = axios.create({
-            baseUrl: process.env.NODE_ENV === "production" ? '/api' : "http://localhost:3000/api"
+            baseURL: process.env.NODE_ENV === "production" ? '/api' : "http://localhost:3000/api"
         });
 
         function getEpics() {

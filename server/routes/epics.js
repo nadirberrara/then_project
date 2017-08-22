@@ -9,24 +9,20 @@ var Epic = require("../models/epic.js");
 var Story = require("../models/story.js");
 
 router.get("/", (req, res, next) => {
-  res.json("Home");
-});
-
-router.get("/api/epics/", (req, res, next) => {
   Epic.find(req.params, function(err, epic) {
     if (err) res.json("epic not find");
     else res.json(epic);
   });
 });
 
-router.get("/api/epics/:id", (req, res, next) => {
+router.get("/:id", (req, res, next) => {
   Epic.findById(req.params.id, function(err, epic) {
     if (err) res.json("epic not find");
     else res.json(epic);
   });
 });
 
-router.get("/api/epics/:epicId/stories/", (req, res, next) => {
+router.get("/:epicId/stories/", (req, res, next) => {
   var epicId = req.params.epicId;
   Story.find({ epic: epicId }, function(err, story) {
     if (err) res.json("story not find");
@@ -34,7 +30,7 @@ router.get("/api/epics/:epicId/stories/", (req, res, next) => {
   });
 });
 
-router.post("/api/epics/:epicId/stories/", (req, res) => {
+router.post("/:epicId/stories/", (req, res) => {
   let myStory = new Story({
     text: req.body.text,
     epic: req.params.epicId
@@ -51,7 +47,7 @@ router.post("/api/epics/:epicId/stories/", (req, res) => {
   });
 });
 
-router.post("/api/epics/", (req, res) => {
+router.post("/", (req, res) => {
   let myEpic = new Epic({
     title: req.body.title,
     mainStory: req.body.mainStory,
@@ -63,7 +59,7 @@ router.post("/api/epics/", (req, res) => {
   });
 });
 
-router.post("/api/epics/:epicId/add-random-story", (req, res) => {
+router.post("/:epicId/add-random-story", (req, res) => {
   Epic.findById(req.params.epicId, function(err, epic) {
     Story.find(
       {

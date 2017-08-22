@@ -1,0 +1,21 @@
+{
+  "name": "starter-code",
+  "version": "1.0.0",
+  "description": "THEN_project by Nadir BERRARA",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd server && npm install",
+    "start": "cd server && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nadirberrara/then_project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nadirberrara/then_project/issues"
+  },
+  "homepage": "https://github.com/nadirberrara/then_project#readme"
+}

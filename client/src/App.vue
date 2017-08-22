@@ -6,10 +6,10 @@
       <header class="nav">
         <div class="container">
           <div class="nav-left">
-            <a href="#" class="nav-item">
+            <router-link to="/" class="nav-item">
               HOME
               <!-- <img src="" alt=""> -->
-            </a>
+            </router-link>
           </div>
 
           <span class="nav-toggle">
@@ -18,12 +18,12 @@
             <span></span>
           </span>
           <div class="nav-right nav-menu">
-            <a href="http://localhost:8080/#/create" class="nav-item">
+            <router-link to="/create" class="nav-item">
               New Story
-            </a>
-            <a href="http://localhost:8080/#/signup" class="nav-item">Signup</a>
-            <a href="http://localhost:8080/#/login" v-if="$root.user" class="nav-item">Login</a>
-            <a href="http://localhost:8080/#/" class="nav-item">About</a>
+            </router-link>
+            <router-link to="/signup" class="nav-item">Signup</router-link>
+            <router-link to="/login" v-if="$root.user" class="nav-item">Login</router-link>
+            <router-link to="/" class="nav-item">About</router-link>
           </div>
         </div>
       </header>

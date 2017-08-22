@@ -1,3 +1,5 @@
+require("dotenv").config();
+const history = require("connect-history-api-fallback");
 var express = require("express");
 var path = require("path");
 var favicon = require("serve-favicon");
@@ -5,8 +7,8 @@ var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/thenProject");
-const index = require("./routes/index");
+mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
+const epics = require("./routes/epics");
 const authRoutes = require("./routes/auth");
 const passport = require("passport");
 const User = require("./models/user");
@@ -82,7 +84,7 @@ app.get("/api/me", (req, res) => {
   }
 });
 
-app.use("/", index);
+app.use("/api/epics", epics);
 app.use("/api", authRoutes);
 
 // This is an example of protected route
@@ -111,6 +113,10 @@ app.get(
     res.json({ message: "Go ahead" });
   }
 );
+
+const clientRoot = path.join(__dirname, "../client/dist");
+app.use("/", express.static(clientRoot));
+app.use(history("index.html", { root: clientRoot }));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
