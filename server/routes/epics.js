@@ -34,7 +34,7 @@ router.get("/:epicId/stories/", (req, res, next) => {
   });
 });
 
-router.post("/:epicId/stories/", (req, res) => {
+router.post("/:epicId/stories/", ensureLoggedIn, (req, res) => {
   let myStory = new Story({
     text: req.body.text,
     epic: req.params.epicId
@@ -51,7 +51,7 @@ router.post("/:epicId/stories/", (req, res) => {
   });
 });
 
-router.post("/", (req, res) => {
+router.post("/", ensureLoggedIn, (req, res) => {
   let myEpic = new Epic({
     title: req.body.title,
     mainStory: req.body.mainStory,

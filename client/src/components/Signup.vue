@@ -43,6 +43,7 @@
             <div class="column" v-else>
                 <h1 class="title">Please Log In :</h1>
                 <hr>
+                <div class="notification is-primary" v-if="loggedIn">You are now connected</div>
 
                 <article v-if="error" class="message is-danger">
                     <div class="message-body">{{ error }}</div>
@@ -87,12 +88,15 @@ export default {
             username: '',
             password: '',
             error: '',
-            loginSignup: true
+            loginSignup: true,
+            loggedIn: false
         }
     },
     methods: {
         signup() {
-            this.error = ''
+            this.error = '',
+                auth.loadUser(this)
+
             auth.signup({
                 username: this.username,
                 password: this.password
@@ -109,9 +113,13 @@ export default {
                     username: this.username,
                     token: response.token
                 }
+                this.loggedIn = true,
+                    this.username = "",
+                    this.password = ""
             }).catch(err => {
                 this.error = err.response.data
             })
+
         },
         secret() {
             auth.secret().then(response => {
@@ -131,6 +139,10 @@ export default {
 </script>
 
 <style scoped>
+div.notification.is-primary {
+    margin: 20px
+}
+
 label.label {
     color: #06425c
 }

@@ -44,12 +44,18 @@ export default {
         }
     },
 
+
     methods: {
         likeStory(story) {
             myAPI.post('/epics/likes', { storyId: story._id }).then(story => {
             })
+        },
+        selectRandomStory() {
+            myAPI.post("/" + this.epicId + "/add-random-story").then(story => {
+            })
         }
     }
+
 
 
 };

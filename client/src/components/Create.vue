@@ -4,10 +4,20 @@
             CREATE YOUR STORY
         </h1>
         <div class="column">
-            <img src="../assets/people2.jpg" style="width: 500px">
+            <img src="../assets/photos-retouchees/IH-5.jpg" style="width: 500px">
         </div>
         <hr>
 
+        <!-- <div v-else="ifLoggedOut"> -->
+        <div class="notification is-info">
+            You have to be logged In to post a new story
+        </div>
+        <router-link to="/signup" class="card-footer-item ">
+            <button class="button">Login / Signup</button>
+        </router-link>
+        <!-- </div> -->
+        <hr>
+        <!-- <div v-if="ifLoggedIn"> -->
         <div v-if="bravo" class="notification is-primary">
             Your story was added successfully
         </div>
@@ -26,6 +36,7 @@
         <div>
             <button class="button submit" v-on:click="createNewEpic()">Submit my story</button>
         </div>
+        <!-- </div> -->
 
     </div>
 </template>
@@ -45,9 +56,17 @@ export default {
             text: "",
             epic: "",
             bravo: false,
-            danger: false
+            danger: false,
+            user: ""
         }
     },
+
+    created() {
+        function ifLoggedIn() {
+            $root.user = true
+        }
+    },
+
     methods: {
         createNewEpic() {
 
@@ -65,6 +84,10 @@ export default {
 </script>
 
 <style scoped>
+div.notification.is-info {
+    margin: 20px 20px
+}
+
 div.column img {
     border: 1px solid white
 }
@@ -91,6 +114,42 @@ p {
 button.button.submit {
     color: #06425c
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

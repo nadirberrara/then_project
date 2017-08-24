@@ -25,12 +25,11 @@
             </header>
             <div class="card-content">
                 <div class="content">
-                    <h1>Rules :</h1>
+                    <h1>How it works : </h1>
 
                     <li>Login or Signup</li>
                     <li>Participate a Story : Read & Vote</li>
                     <li>Create your own story</li>
-                    <li>Be there at 8 for updates</li>
                     <li>Share with friends</li>
 
                 </div>
@@ -49,6 +48,7 @@
             </h1>
             <li v-for="epic in epics ">
                 <router-link :to=" '/epics/' + epic._id ">{{ epic.title }}</router-link>
+
             </li>
             <h1 class="title ">
                 <span class="fa fa-arrow-down "></span>
