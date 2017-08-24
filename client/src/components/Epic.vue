@@ -5,7 +5,6 @@
 
       <div v-if="epic && allStories" class="epic">
         <div class="titre">
-          <i>by Nadir </i>
           <h3 class="title"> {{ epic.title }} </h3>
           <p>-</p>
           <p>{{epic.mainStory}}</p>

@@ -8,6 +8,8 @@ var Epic = require("../models/epic.js");
 var Story = require("../models/story.js");
 var Like = require("../models/like.js");
 
+const { ensureLoggedIn } = require("../middlewares");
+
 router.get("/", (req, res, next) => {
   Epic.find(req.params, function(err, epic) {
     if (err) res.json("epic not find");
@@ -27,20 +29,7 @@ router.get("/:epicId/stories/", (req, res, next) => {
   Story.find({ epic: epicId }, function(err, stories) {
     if (err) res.json("stories not find");
     else {
-      // for (var i = 0; i < stories.length; i++) {
-      //   var counter = 0;
-      //   var storyId = stories[i]._id;
-      //   Like.find({ story: storyId }, function(err, likes) {
-      //     counter++;
-      //     stories[0].nbOfLikes = 12;
-      //     if (counter === stories.length) {
-      //       res.json(stories);
-      //     }
-      //   });
-      // }
-      // // TEST
-      //   stories[0].test = "Test";
-      //   res.json(stories[0]);
+      res.json(stories);
     }
   });
 });
@@ -98,14 +87,34 @@ router.post("/:epicId/add-random-story", (req, res) => {
   });
 });
 
-router.post("/likes", (req, res) => {
-  let newLike = new Like({
-    userId: req.body.userId,
-    storyId: req.body.storyId
-  });
-  newLike.save(err => {
-    if (err) res.json({ error: err });
-    else res.json("Liked");
+router.post("/likes", ensureLoggedIn, (req, res) => {
+  var { userId, storyId } = req.body;
+  Story.findOne({ _id: storyId }, (err, story) => {
+    if (err || !story) res.json({ error: err ? err : "No story found" });
+    else {
+      console.log("story", story);
+      if (story.likes.indexOf(userId) !== -1) {
+        // userId is in story.likes
+        res.json({
+          msg: "The user already liked this story",
+          nbOfLikes: story.likes.length,
+          story: story
+        });
+      } else {
+        story.likes.push(userId);
+        Story.findByIdAndUpdate(
+          storyId,
+          { $set: { likes: story.likes } },
+          (err, newStory) => {
+            res.json({
+              msg: "New like",
+              nbOfLikes: story.likes.length,
+              story: story
+            });
+          }
+        );
+      }
+    }
   });
 });
 

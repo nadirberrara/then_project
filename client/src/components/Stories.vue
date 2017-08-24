@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div>
 
         <div class="block scroll">
             <table class="table" v-for="story in stories">
@@ -8,8 +8,8 @@
                         <strong></strong>
                         <th>then, {{ story.text }}</th>
                         <th class="is-pulled-right">
-                            <button class="button is-right">
-                                <span class="fa fa-thumbs-o-up"> 0</span>
+                            <button @click="likeStory(story)" class="button is-right">
+                                <span class="fa fa-thumbs-o-up"> {{ story.likes.length }}</span>
                             </button>
                         </th>
 
@@ -37,31 +37,25 @@ export default {
         return {
             styles: {
                 "word-break": "break-word"
-            }
+            },
+            like: null,
+            story: null,
+            userId: null
         }
     },
 
     methods: {
-        // selectRandomStory() {
-        //     myAPI.post("/epics/" + this.epic._id, { text: this.text }).then(response => {
-        //         this.
-        //     })
-        // }
+        likeStory(story) {
+            myAPI.post('/epics/likes', { storyId: story._id }).then(story => {
+            })
+        }
     }
 
-    //         submitNewStory() {
-    //       this.edit = false
-    //       myAPI.post("/epics/" + this.epic._id + "/stories", { text: this.text }).then(response => {
-    //         this.getStories().then(stories => {
-    //           this.allStories = stories
-    //         })
-    //         return response.data;
-    //       })
-    //       this.text = ""
-    //     },
-    //   },
 
 };
+
+
+
 </script>
 
 <style scoped>

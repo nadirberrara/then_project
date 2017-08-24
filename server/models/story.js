@@ -15,10 +15,21 @@ const StorySchema = new Schema({
     type: Boolean
   },
   userId: {
-    type: Object
+    type: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }
   },
   username: {
     type: String
+  },
+  likes: {
+    type: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+      }
+    ]
   }
 });
 

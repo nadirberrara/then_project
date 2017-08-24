@@ -1,21 +1,22 @@
 <template>
     <section class="">
 
-        <div class="columns photos">
+        <!-- <div class="columns photos">
 
-            <div class="column">
-                <img src="../assets/photos/people3.jpg" style="width: 500px">
-            </div>
+                            <div class="column">
+                                <img src="../assets/photos-retouchees/IH-2.jpg" style="width: 500px">
+                            </div>
 
-            <div class="column">
-                <img src="../assets/photos/people5.jpg" style="width: 500px">
-            </div>
+                            <div class="column">
+                                <img src="../assets/photos-retouchees/IH-3.jpg" style="width: 500px">
+                            </div>
 
-            <div class="column">
-                <img src="../assets/photos/people2.jpg" style="width: 500px">
-            </div>
+                            <div class="column">
+                                <img src="../assets/photos-retouchees/IH.jpg" style="width: 500px">
+                            </div>
 
-        </div>
+                        </div> -->
+
         <div class="card">
             <header class="card-header">
                 <p class="card-header-title">
@@ -37,7 +38,7 @@
             <footer class="card-footer">
                 <router-link to="/signup" class="card-footer-item ">Signup</router-link>
 
-                <a href=" " class="card-footer-item ">Login</a>
+                <router-link to="/signup" class="card-footer-item ">Login</router-link>
             </footer>
         </div>
 

@@ -3,7 +3,9 @@
         <h1 class="title">
             CREATE YOUR STORY
         </h1>
-
+        <div class="column">
+            <img src="../assets/people2.jpg" style="width: 500px">
+        </div>
         <hr>
 
         <div v-if="bravo" class="notification is-primary">
@@ -11,10 +13,6 @@
         </div>
         <div v-if="danger" class="notification is-danger">
             Informations missing
-        </div>
-
-        <div class="column">
-            <img src="../assets/photos/people4.jpg" style="width: 500px">
         </div>
 
         <div>
@@ -93,6 +91,9 @@ p {
 button.button.submit {
     color: #06425c
 }
+
+
+
 
 
 
