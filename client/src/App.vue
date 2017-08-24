@@ -21,8 +21,8 @@
             <router-link to="/create" class="nav-item">
               New Story
             </router-link>
-            <router-link to="/signup" class="nav-item">Signup</router-link>
-            <router-link to="/login" v-if="$root.user" class="nav-item">Login</router-link>
+            <router-link to="/signup" v-if="!$root.user" class="nav-item">Signup / Login</router-link>
+            <a href="" v-if="$root.user" @click="logout" class="nav-item">Logout</a>
             <router-link to="/" class="nav-item">About</router-link>
           </div>
         </div>
@@ -30,13 +30,28 @@
     </div>
     <!-- </section> -->
 
-    <div class="logo">
-      <img src="./assets/logo5version2.png" style="width: 400px">
+    <div class="logoThen">
+      <img src="./assets/logo-then2.png" style="width: 500px">
     </div>
+
+    <hr>
 
     <section class="">
       <div class="">
         <router-view></router-view>
+
+        <div class="logo">
+          <div class="columns is-half is-narrow">
+            <div class="column ">
+              <a href="http://facebook.com" target="_blank" class="fa fa-facebook"></a>
+              <a href="http://plus.google.com" target="_blank" class="fa fa-google-plus"></a>
+              <a href="http://linkedin.com" target="_blank" class="fa fa-linkedin"></a>
+              <a href="http://twitter.com" target="_blank" class="fa fa-twitter"></a>
+            </div>
+          </div>
+          <img src="./assets/logo3-copie2.png" style="width: 200px">
+        </div>
+
         <hr>
         <div class="">
           <footer> @ Nadir BERRARA / IH Jun17 </footer>
@@ -56,6 +71,12 @@ export default {
     // Try to load the user when the app is loaded
     // This happens only once
     auth.loadUser(this)
+  },
+  methods: {
+    logout(event) {
+      event.preventDefault()
+      auth.logout(this)
+    }
   }
 }
 </script>
@@ -70,6 +91,8 @@ export default {
   background: url("./assets/background1.jpg") no-repeat fixed;
   background-size: cover;
 }
+
+
 
 a.nav-item:not(.button) {
   color: white
@@ -87,8 +110,32 @@ footer.column {
   margin-top: 30px;
 }
 
+.photos {
+  margin: 20px
+}
+
 footer {
   color: white;
   padding-bottom: 20px
+}
+
+a.fa.fa-facebook {
+  margin: auto 5px;
+  color: #3B5998
+}
+
+a.fa.fa-google-plus {
+  margin: auto 5px;
+  color: #d34836
+}
+
+a.fa.fa-linkedin {
+  margin: auto 5px;
+  color: #007bb6
+}
+
+a.fa.fa-twitter {
+  margin: auto 5px;
+  color: #00aced
 }
 </style>

@@ -42,6 +42,7 @@
           <button class="button" type="submit" v-on:click="submitNewStory()"> submit my story </button>
           <button class="button" type="submit" v-on:click="cancelEditing()"> cancel </button>
         </div>
+
       </div>
 
     </div>
@@ -134,7 +135,7 @@ span.blue {
   background-color: rgba(81, 163, 157, 0.9);
   color: white;
   padding: 20px;
-  border: 1px white solid;
+  border: 3px white solid;
 }
 
 .suite {
@@ -142,7 +143,7 @@ span.blue {
   color: white;
   padding: 20px;
   margin-top: -10px;
-  border: 1px white solid;
+  border: 3px white solid;
 }
 
 ,
@@ -161,6 +162,6 @@ h3.title {
 .tag {
   background-color: rgba(205, 187, 121, 0.9);
   color: white;
-  border: white solid 1px
+  border: white solid 3px
 }
 </style>

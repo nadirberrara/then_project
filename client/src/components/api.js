@@ -47,6 +47,7 @@ function loadUser(vm) {
 }
 
 function logout(vm) {
+  console.log("LOGOUT");
   localStorage.removeItem("jwtToken");
   delete axios.defaults.headers.common.Authorization;
   vm.$root.user = null;

@@ -1,6 +1,21 @@
 <template>
     <section class="">
 
+        <div class="columns photos">
+
+            <div class="column">
+                <img src="../assets/photos/people3.jpg" style="width: 500px">
+            </div>
+
+            <div class="column">
+                <img src="../assets/photos/people5.jpg" style="width: 500px">
+            </div>
+
+            <div class="column">
+                <img src="../assets/photos/people2.jpg" style="width: 500px">
+            </div>
+
+        </div>
         <div class="card">
             <header class="card-header">
                 <p class="card-header-title">
@@ -12,7 +27,7 @@
                     <h1>Rules :</h1>
 
                     <li>Login or Signup</li>
-                    <li>Select a Story : Read & Vote</li>
+                    <li>Participate a Story : Read & Vote</li>
                     <li>Create your own story</li>
                     <li>Be there at 8 for updates</li>
                     <li>Share with friends</li>
@@ -28,7 +43,7 @@
 
         <div class="hero ">
             <h1 class="title ">
-                <p>Participate a Story</p>
+                <p>Select a Story</p>
                 <span class="fa fa-arrow-down icon is-large"></span>
             </h1>
             <li v-for="epic in epics ">
@@ -80,6 +95,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
+div.column img {
+    border: 1px solid white
+}
+
 li {
     color: white;
     font-size: 25px
@@ -89,7 +108,7 @@ li {
     height: 100%;
     margin: 30px;
     padding: 30px;
-    border: 1px solid white;
+    border: 3px solid white;
     background-color: rgba(6, 66, 92, 0.9);
     border-radius: 10px
 }
@@ -98,7 +117,7 @@ li {
     margin: 30px 100px;
     padding: 20px;
     color: white;
-    border: 1px solid white;
+    border: 3px solid white;
     background-color: #CDBB79;
     border-radius: 10px
 }
@@ -109,7 +128,7 @@ li {
     ;
 
     color: white;
-    border: white 1px solid;
+    border: white 3px solid;
     border-radius: 10px
 }
 

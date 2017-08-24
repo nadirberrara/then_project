@@ -1,35 +1,79 @@
 <template>
     <div>
-        <article v-if="error" class="message is-danger">
-            <div class="message-body">{{ error }}</div>
-        </article>
 
-        <div class="field">
-            <label class="label">Username</label>
-            <div class="control">
-                <input class="input" v-model="username" type="text">
+        <div class="columns">
+            <div class="column" v-if="loginSignup">
+                <h1 class="title">Please Sign Up :</h1>
+                <hr>
+
+                <article v-if="error" class="message is-danger">
+                    <div class="message-body">{{ error }}</div>
+                </article>
+
+                <div class="field">
+                    <label class="label">Name :</label>
+                    <div class="control">
+                        <input class="input" type="text">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Email :</label>
+                    <div class="control">
+                        <input class="input" v-model="username" type="text">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Password :</label>
+                    <div class="control">
+                        <input class="input" v-model="password" type="password">
+                    </div>
+                </div>
+                <button @click="signup" class="button">Signup</button>
+
+                <div class="already">
+                    <p>Already have an account?
+                    </p>
+                    <button class="button" @click="loginFromSignup">Log In</button>
+                </div>
+
             </div>
+
+            <div class="column" v-else>
+                <h1 class="title">Please Log In :</h1>
+                <hr>
+
+                <article v-if="error" class="message is-danger">
+                    <div class="message-body">{{ error }}</div>
+                </article>
+
+                <div class="field">
+                    <label class="label">Email :</label>
+                    <div class="control">
+                        <input class="input" v-model="username" type="text">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Password :</label>
+                    <div class="control">
+                        <input class="input" v-model="password" type="password">
+                    </div>
+                </div>
+
+                <button @click="login" class="button">Login</button>
+
+                <div class="already">
+                    <p>I need an account
+                    </p>
+                    <button class="button" @click="SignupFromLogin">Sign Up</button>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="field">
-            <label class="label">Name</label>
-            <div class="control">
-                <input class="input" type="text">
-            </div>
-        </div>
-
-        <div class="field">
-            <label class="label">Password</label>
-            <div class="control">
-                <input class="input" v-model="password" type="password">
-            </div>
-        </div>
-
-        <pre>{{ response }}</pre>
-        <button @click="signup" class="button is-primary">Signup</button>
-        <button @click="login" class="button is-success">Login</button>
-        <button @click="logout" class="button is-danger">Logout</button>
-        <button @click="secret" class="button is-warning">Secret</button>
     </div>
 </template>
 
@@ -42,7 +86,8 @@ export default {
             response: '',
             username: '',
             password: '',
-            error: ''
+            error: '',
+            loginSignup: true
         }
     },
     methods: {
@@ -60,8 +105,12 @@ export default {
         login() {
             auth.login(this.username, this.password, this).then((response) => {
                 this.response = response
+                this.$root.user = {
+                    username: this.username,
+                    token: response.token
+                }
             }).catch(err => {
-                this.error = err
+                this.error = err.response.data
             })
         },
         secret() {
@@ -71,8 +120,11 @@ export default {
                 this.response = err
             })
         },
-        logout() {
-            auth.logout(this)
+        loginFromSignup() {
+            this.loginSignup = false
+        },
+        SignupFromLogin() {
+            this.loginSignup = true
         }
     }
 }
@@ -81,5 +133,18 @@ export default {
 <style scoped>
 label.label {
     color: #06425c
+}
+
+.field {
+    margin: 10px 80px
+}
+
+h1.title {
+    color: #06425c;
+}
+
+p {
+    margin-top: 80px;
+    color: white
 }
 </style>

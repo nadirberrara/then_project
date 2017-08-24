@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var { ObjectId } = mongoose.Types;
 var Epic = require("../models/epic.js");
 var Story = require("../models/story.js");
+var Like = require("../models/like.js");
 
 router.get("/", (req, res, next) => {
   Epic.find(req.params, function(err, epic) {
@@ -23,9 +24,24 @@ router.get("/:id", (req, res, next) => {
 
 router.get("/:epicId/stories/", (req, res, next) => {
   var epicId = req.params.epicId;
-  Story.find({ epic: epicId }, function(err, story) {
-    if (err) res.json("story not find");
-    else res.json(story);
+  Story.find({ epic: epicId }, function(err, stories) {
+    if (err) res.json("stories not find");
+    else {
+      // for (var i = 0; i < stories.length; i++) {
+      //   var counter = 0;
+      //   var storyId = stories[i]._id;
+      //   Like.find({ story: storyId }, function(err, likes) {
+      //     counter++;
+      //     stories[0].nbOfLikes = 12;
+      //     if (counter === stories.length) {
+      //       res.json(stories);
+      //     }
+      //   });
+      // }
+      // // TEST
+      //   stories[0].test = "Test";
+      //   res.json(stories[0]);
+    }
   });
 });
 
@@ -79,6 +95,17 @@ router.post("/:epicId/add-random-story", (req, res) => {
         }
       }
     );
+  });
+});
+
+router.post("/likes", (req, res) => {
+  let newLike = new Like({
+    userId: req.body.userId,
+    storyId: req.body.storyId
+  });
+  newLike.save(err => {
+    if (err) res.json({ error: err });
+    else res.json("Liked");
   });
 });
 

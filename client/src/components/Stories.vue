@@ -17,7 +17,7 @@
                 </tbody>
 
             </table>
-            <!-- <button class="button" type="submit" v-on:click="selectRandomStory()"> Select randomly a story </button> -->
+            <button class="button" type="submit" v-on:click="selectRandomStory()"> Select randomly a story </button>
 
         </div>
     </div>
@@ -42,28 +42,35 @@ export default {
     },
 
     methods: {
-        selectRandomStory() {
-            var randomStory = this.stories[Math.floor(Math.random() * this.stories.length)]
-
-
-            myAPI.post("/epics/" + this.epicId + "/stories", { text: randomStory.text }).then(response => {
-                return this.randomStory
-            })
-        }
+        // selectRandomStory() {
+        //     myAPI.post("/epics/" + this.epic._id, { text: this.text }).then(response => {
+        //         this.
+        //     })
+        // }
     }
+
+    //         submitNewStory() {
+    //       this.edit = false
+    //       myAPI.post("/epics/" + this.epic._id + "/stories", { text: this.text }).then(response => {
+    //         this.getStories().then(stories => {
+    //           this.allStories = stories
+    //         })
+    //         return response.data;
+    //       })
+    //       this.text = ""
+    //     },
+    //   },
 
 };
 </script>
 
 <style scoped>
-.block {}
-
 .table {
     background-color: #CDBB79;
     color: white;
     overflow-y: scroll;
     display: block;
-    border: 1px white solid;
+    border: 3px white solid;
 }
 
 .scroll {

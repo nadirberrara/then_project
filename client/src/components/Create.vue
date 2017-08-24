@@ -4,12 +4,19 @@
             CREATE YOUR STORY
         </h1>
 
+        <hr>
+
         <div v-if="bravo" class="notification is-primary">
             Your story was added successfully
         </div>
         <div v-if="danger" class="notification is-danger">
             Informations missing
         </div>
+
+        <div class="column">
+            <img src="../assets/photos/people4.jpg" style="width: 500px">
+        </div>
+
         <div>
             <p>Choose a title :</p>
             <input type="text" class="button is-large" v-model="title">
@@ -21,6 +28,7 @@
         <div>
             <button class="button submit" v-on:click="createNewEpic()">Submit my story</button>
         </div>
+
     </div>
 </template>
 <script>
@@ -59,8 +67,13 @@ export default {
 </script>
 
 <style scoped>
+div.column img {
+    border: 1px solid white
+}
+
 h1.title {
-    color: #06425c
+    color: #06425c;
+    margin: 40px
 }
 
 p {
@@ -69,7 +82,8 @@ p {
 
 .container {
     height: auto;
-    margin-top: 30px
+    margin-top: 30px;
+    margin-bottom: 150px
 }
 
 .story {
@@ -79,6 +93,23 @@ p {
 button.button.submit {
     color: #06425c
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
