@@ -1,5 +1,5 @@
 require("dotenv").config();
-const history = require("connect-history-api-fallback");
+const history = require("express-history-api-fallback");
 var express = require("express");
 var path = require("path");
 var favicon = require("serve-favicon");
