@@ -25,17 +25,20 @@
             Informations missing
         </div>
 
-        <div>
-            <p>Choose a title :</p>
-            <input type="text" class="button is-large" v-model="title">
-        </div>
-        <div class="story">
-            <p>Start your story:</p>
-            <textarea name="" id="" cols="30" rows="2" class="textarea is-medium" placeholder="" v-model="text"></textarea>
-        </div>
-        <div>
-            <button class="button submit" v-on:click="createNewEpic()">Submit my story</button>
-        </div>
+        <form action="" @submit.prevent="createNewEpic">
+            <div>
+                <p>Choose a title :</p>
+                <input type="text" class="button is-large" v-model="title">
+            </div>
+            <div class="story">
+                <p>Start your story:</p>
+                <textarea name="" id="" cols="30" rows="2" class="textarea is-medium" v-model="text"></textarea>
+            </div>
+            <div>
+                <button class="button submit">Submit my story</button>
+            </div>
+        </form>
+
         <!-- </div> -->
 
     </div>
@@ -64,11 +67,8 @@ export default {
     methods: {
         createNewEpic() {
 
-            myAPI.post("epics/", { mainStory: this.text, title: this.title }).then(epic => {
-                this.title = "",
-                    this.text = ""
-                this.bravo = true
-                this.newEpic = epic
+            myAPI.post("epics/", { mainStory: this.text, title: this.title }).then(({ data: epic }) => {
+                this.$router.push("/epics/" + epic._id)
             })
         }
     }
@@ -108,6 +108,16 @@ p {
 button.button.submit {
     color: #06425c
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
