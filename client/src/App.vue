@@ -23,7 +23,7 @@
             </router-link>
             <router-link to="/signup" v-if="!$root.user" class="nav-item">Signup / Login</router-link>
             <a href="" v-if="$root.user" @click="logout" class="nav-item">Logout</a>
-            <router-link to="/" class="nav-item">About</router-link>
+            <router-link to="" class="nav-item">About</router-link>
           </div>
         </div>
       </header>

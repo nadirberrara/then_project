@@ -1,6 +1,10 @@
 <template>
   <section class="hero">
 
+    <div class="column">
+      <img src="../assets/people5.jpg" style="width: 500px">
+    </div>
+
     <div class="">
 
       <div v-if="epic && allStories" class="epic">
@@ -126,6 +130,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+img {
+  border: 1px white solid
+}
+
 span.blue {
   color: #06425C
 }

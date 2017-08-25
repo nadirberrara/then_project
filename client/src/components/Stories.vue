@@ -17,7 +17,7 @@
                 </tbody>
 
             </table>
-            <button class="button" type="submit" v-on:click="selectRandomStory()"> Select randomly a story </button>
+            <button class="button" type="submit" v-on:click="pushStory()"> Push the best story </button>
 
         </div>
     </div>
@@ -47,11 +47,11 @@ export default {
 
     methods: {
         likeStory(story) {
-            myAPI.post('/epics/likes', { storyId: story._id }).then(story => {
+            myAPI.post('/epics/likes', { storyId: story._id }).then(payload => {
             })
         },
-        selectRandomStory() {
-            myAPI.post("/" + this.epicId + "/add-random-story").then(story => {
+        pushStory() {
+            myAPI.post("/epics/" + this.epicId + "/add-random-story").then(story => {
             })
         }
     }

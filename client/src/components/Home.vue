@@ -41,6 +41,10 @@
             </footer>
         </div>
 
+        <div class="column">
+            <img src="../assets/people2.jpg" style="width: 500px">
+        </div>
+
         <div class="hero ">
             <h1 class="title ">
                 <p>Select a Story</p>

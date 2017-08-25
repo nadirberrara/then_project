@@ -88,11 +88,13 @@ router.post("/:epicId/add-random-story", (req, res) => {
 });
 
 router.post("/likes", ensureLoggedIn, (req, res) => {
-  var { userId, storyId } = req.body;
+  var { storyId } = req.body;
+  var userId = req.user._id;
   Story.findOne({ _id: storyId }, (err, story) => {
     if (err || !story) res.json({ error: err ? err : "No story found" });
     else {
       console.log("story", story);
+      console.log(userId);
       if (story.likes.indexOf(userId) !== -1) {
         // userId is in story.likes
         res.json({
