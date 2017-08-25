@@ -2,7 +2,7 @@
     <div>
 
         <div class="columns">
-            <div class="column" v-if="loginSignup">
+            <form class="column" v-if="loginSignup" @submit.prevent="signup">
                 <h1 class="title">Please Sign Up :</h1>
                 <hr>
                 <div class="notification is-primary" v-if="registered">You are now registered</div>
@@ -31,7 +31,7 @@
                         <input class="input" v-model="password" type="password">
                     </div>
                 </div>
-                <button @click="signup" class="button">Signup</button>
+                <button class="button" type="submit">Signup</button>
 
                 <div class="already">
                     <p>Already have an account?
@@ -39,9 +39,9 @@
                     <button class="button" @click="loginFromSignup">Log In</button>
                 </div>
 
-            </div>
+            </form>
 
-            <div class="column" v-else>
+            <form class="column" v-else @submit.prevent="login">
                 <h1 class="title">Please Log In :</h1>
                 <hr>
                 <div class="notification is-primary" v-if="loggedIn">You are now connected</div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                <button @click="login" class="button">Login</button>
+                <button type="submit" class="button">Login</button>
 
                 <div class="already">
                     <p>I need an account
@@ -72,7 +72,7 @@
                     <button class="button" @click="SignupFromLogin">Sign Up</button>
                 </div>
 
-            </div>
+            </form>
 
         </div>
 

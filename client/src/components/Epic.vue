@@ -24,8 +24,8 @@
 
         </div>
       </div>
-      <div v-if="!edit" class="is-white andThenButton">
-        <button v-on:click="addNewStory" class="button is-large">my then</button>
+      <div v-if="!edit && $root.user" class="is-white andThenButton">
+        <button v-on:click="addNewStory" class="button is-large">Add then</button>
       </div>
       <div class="column is-gapless">
         <div v-if="!edit">
@@ -105,10 +105,12 @@ export default {
       });
     },
 
-    // pushStory() {
-    //   myAPI.post("/epics/" + this.epicId + "/add-random-story", {}).then(payload => {
-    //   })
-    // }
+    pushStory() {
+      myAPI.post("/epics/" + this.epic._id + "/add-next-story").then(response => {
+        this.epic = response.data
+        this.allStories = []
+      })
+    },
 
 
 

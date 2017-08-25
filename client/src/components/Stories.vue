@@ -11,7 +11,7 @@
                 </span>
 
             </div>
-            <button class="button" v-if="$root.user.id === epic.userId" type="submit" @click="$emit('push-story', story._id)"> Push the best story </button>
+            <button class="button" v-if="$root.user && $root.user.id === epic.userId" type="submit" @click="$emit('push-story')"> Push the best story </button>
 
         </div>
     </div>
