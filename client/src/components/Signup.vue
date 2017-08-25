@@ -5,6 +5,7 @@
             <div class="column" v-if="loginSignup">
                 <h1 class="title">Please Sign Up :</h1>
                 <hr>
+                <div class="notification is-primary" v-if="registered">You are now registered</div>
 
                 <article v-if="error" class="message is-danger">
                     <div class="message-body">{{ error }}</div>
@@ -89,7 +90,8 @@ export default {
             password: '',
             error: '',
             loginSignup: true,
-            loggedIn: false
+            loggedIn: false,
+            registered: false
         }
     },
     methods: {
@@ -101,7 +103,8 @@ export default {
                 username: this.username,
                 password: this.password
             }).then((response) => {
-                this.response = response
+                this.response = response,
+                    this.registered = true
             }).catch(err => {
                 this.error = err.response.data
             })
@@ -109,10 +112,6 @@ export default {
         login() {
             auth.login(this.username, this.password, this).then((response) => {
                 this.response = response
-                this.$root.user = {
-                    username: this.username,
-                    token: response.token
-                }
                 this.loggedIn = true,
                     this.username = "",
                     this.password = ""

@@ -23,13 +23,13 @@
             </router-link>
             <router-link to="/signup" v-if="!$root.user" class="nav-item">Signup / Login</router-link>
             <a href="" v-if="$root.user" @click="logout" class="nav-item">Logout</a>
-            <router-link to="" class="nav-item">About</router-link>
+            <router-link to="/" class="nav-item">About</router-link>
           </div>
         </div>
       </header>
     </div>
     <!-- </section> -->
-
+    <p v-if="!$root.user" class="notification nav-item is-danger">You are disconnected</p>
     <div class="logoThen">
       <img src="./assets/logo-then2.png" style="width: 500px">
     </div>
@@ -81,6 +81,14 @@ export default {
 }
 </script>
 
+<style scoped>
+footer {
+  color: white;
+  padding-bottom: 20px
+}
+</style>
+
+
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -112,11 +120,6 @@ footer.column {
 
 .photos {
   margin: 20px
-}
-
-footer {
-  color: white;
-  padding-bottom: 20px
 }
 
 a.fa.fa-facebook {

@@ -19,9 +19,9 @@ function login(username, password, vm) {
     })
     .then(response => {
       // tell axios to always use the token
-      const { token, name } = response.data;
+      const { token, user } = response.data;
       localStorage.setItem("jwtToken", token);
-      localStorage.setItem("user.name", name);
+      localStorage.setItem("user", JSON.stringify(user));
       loadUser(vm);
       return response.data;
     });
@@ -35,13 +35,13 @@ function secret() {
 
 function loadUser(vm) {
   const token = localStorage.jwtToken;
-  const name = localStorage["user.name"];
-  if (token) {
+  const user = localStorage["user"];
+  if (token && user) {
     // tell axios to use the token
     axios.defaults.headers.common.Authorization = "Bearer " + token;
     vm.$root.user = {
       token,
-      name
+      ...JSON.parse(user)
     };
   }
 }

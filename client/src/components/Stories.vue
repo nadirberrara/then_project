@@ -2,22 +2,16 @@
     <div>
 
         <div class="block scroll">
-            <table class="table" v-for="story in stories">
-                <tbody :style="styles">
-                    <tr>
-                        <strong></strong>
-                        <th>then, {{ story.text }}</th>
-                        <th class="is-pulled-right">
-                            <button @click="likeStory(story)" class="button is-right">
-                                <span class="fa fa-thumbs-o-up"> {{ story.likes.length }}</span>
-                            </button>
-                        </th>
+            <div class="story" v-for="story in stories">
+                <span>then, {{ story.text }}</span>
+                <span class="is-pulled-right">
+                    <button @click="$emit('like-story', story._id)" class="button is-right">
+                        <i class="fa fa-thumbs-o-up"></i> {{ story.likes.length }}
+                    </button>
+                </span>
 
-                    </tr>
-                </tbody>
-
-            </table>
-            <button class="button" type="submit" v-on:click="pushStory()"> Push the best story </button>
+            </div>
+            <button class="button" v-if="$root.user.id === epic.userId" type="submit" @click="$emit('push-story', story._id)"> Push the best story </button>
 
         </div>
     </div>
@@ -32,32 +26,14 @@ const myAPI = axios.create({
 });
 
 export default {
-    props: ["stories", "epicId"],
+    props: ["stories", "epic"],
     data() {
         return {
-            styles: {
-                "word-break": "break-word"
-            },
             like: null,
             story: null,
             userId: null
         }
     },
-
-
-    methods: {
-        likeStory(story) {
-            myAPI.post('/epics/likes', { storyId: story._id }).then(payload => {
-            })
-        },
-        pushStory() {
-            myAPI.post("/epics/" + this.epicId + "/add-random-story").then(story => {
-            })
-        }
-    }
-
-
-
 };
 
 
@@ -65,12 +41,17 @@ export default {
 </script>
 
 <style scoped>
-.table {
+.story {
     background-color: #CDBB79;
     color: white;
     overflow-y: scroll;
-    display: block;
-    border: 3px white solid;
+    border: 2px white solid;
+    margin-bottom: 1rem;
+    word-break: break-word;
+}
+
+.story button i {
+    margin-right: .5rem;
 }
 
 .scroll {

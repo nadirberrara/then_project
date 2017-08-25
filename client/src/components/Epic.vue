@@ -25,13 +25,13 @@
         </div>
       </div>
       <div v-if="!edit" class="is-white andThenButton">
-        <button v-on:click="addNewStory()" class="button is-large">my then</button>
+        <button v-on:click="addNewStory" class="button is-large">my then</button>
       </div>
       <div class="column is-gapless">
         <div v-if="!edit">
           <div class="stories">
             <div>
-              <tag-stories :stories="allStories" :epicId="epic._id" v-on:nextStory="addNext"> </tag-stories>
+              <tag-stories :stories="allStories" :epic="epic" @nextStory="addNext" @like-story="likeStory($event)" @push-story="pushStory()"> </tag-stories>
             </div>
           </div>
         </div>
@@ -93,13 +93,25 @@ export default {
         return response.data;
       });
     },
-
+    likeStory(storyId) {
+      myAPI.post('/epics/likes', { storyId }).then(payload => {
+        this.allStories.find((story) => story._id === storyId).likes = payload.data.story.likes
+      })
+    },
     getStories() {
       console.log("this.$route", this.$route);
       return myAPI.get("/epics/" + this.$route.params.epicId + "/stories").then(response => {
         return response.data;
       });
     },
+
+    // pushStory() {
+    //   myAPI.post("/epics/" + this.epicId + "/add-random-story", {}).then(payload => {
+    //   })
+    // }
+
+
+
 
     cancelEditing() {
       this.edit = false
@@ -119,7 +131,9 @@ export default {
       })
       this.text = ""
     },
+
   },
+
 
   components: {
     tagStories: Stories

@@ -61,12 +61,6 @@ export default {
         }
     },
 
-    created() {
-        function ifLoggedIn() {
-            $root.user = true
-        }
-    },
-
     methods: {
         createNewEpic() {
 
@@ -114,6 +108,7 @@ p {
 button.button.submit {
     color: #06425c
 }
+
 
 
 

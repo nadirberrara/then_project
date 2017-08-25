@@ -55,7 +55,8 @@ router.post("/", ensureLoggedIn, (req, res) => {
   let myEpic = new Epic({
     title: req.body.title,
     mainStory: req.body.mainStory,
-    nextStories: []
+    nextStories: [],
+    userId: req.user._id
   });
   myEpic.save(err => {
     if (err) res.json(err);

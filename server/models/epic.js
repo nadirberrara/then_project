@@ -15,8 +15,8 @@ const EpicSchema = new Schema({
     // required: true
   },
   userId: {
-    type: Schema.Types.ObjectId
-    // required: true
+    type: Schema.Types.ObjectId,
+    ref: "User"
   }
 });
 
