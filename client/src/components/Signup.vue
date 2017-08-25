@@ -111,13 +111,15 @@ export default {
         },
         login() {
             auth.login(this.username, this.password, this).then((response) => {
+                console.log("Bien passé")
                 this.response = response
                 this.loggedIn = true,
-                    this.username = "",
-                    this.password = ""
+                    this.$router.push("/")
             }).catch(err => {
                 this.error = err.response.data
             })
+
+
 
         },
         secret() {
