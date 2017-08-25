@@ -51,7 +51,7 @@ router.post("/:epicId/stories/", ensureLoggedIn, (req, res) => {
   });
 });
 
-router.post("/", ensureLoggedIn, (req, res) => {
+router.post("/", ensureLoggedIn, (req, res, next) => {
   let myEpic = new Epic({
     title: req.body.title,
     mainStory: req.body.mainStory,
@@ -59,30 +59,36 @@ router.post("/", ensureLoggedIn, (req, res) => {
     userId: req.user._id
   });
   myEpic.save(err => {
-    if (err) res.json(err);
-    else res.json("OK");
+    if (err) next(err);
+    else res.json(myEpic);
   });
 });
 
-router.post("/:epicId/add-random-story", (req, res) => {
+router.post("/:epicId/add-next-story", (req, res, next) => {
   Epic.findById(req.params.epicId, function(err, epic) {
+    if (err) return next(err);
+    if (!epic.userId.equals(req.user._id)) {
+      return res.sendStatus(403);
+    }
     Story.find(
       {
-        epic: ObjectId(req.params.epicId)
+        epic: req.params.epicId
       },
-      function(err, stories) {
-        if (err) {
-          res.status(400).json("stories not find");
-        } else {
-          const randomStory =
-            stories[Math.floor(Math.random() * stories.length)];
-
-          epic.nextStories.push(randomStory.text);
-          epic.save(function(err, doc) {
-            if (err) res.json(err);
-            else res.json(epic);
-          });
-        }
+      (err, stories) => {
+        if (err) return next(err);
+        if (!stories.length) return res.status(400).json("No stories");
+        const bestStory = stories.reduce((best, current) => {
+          if (current.likes.length > best.likes.length) return current;
+          return best;
+        });
+        epic.nextStories.push(bestStory.text);
+        Story.deleteMany({
+          epic: req.params.epicId
+        }).exec();
+        epic.save((err, epic) => {
+          if (err) return next(err);
+          res.json(epic);
+        });
       }
     );
   });
