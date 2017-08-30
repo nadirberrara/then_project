@@ -81,6 +81,7 @@ export default {
   methods: {
     logout(event) {
       event.preventDefault()
+      this.$root.tempMsg = "bye bye"
       auth.logout(this)
     }
   }

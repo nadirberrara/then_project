@@ -7,7 +7,7 @@ import Create from "@/components/Create";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   routes: [
     {
@@ -33,3 +33,11 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  router.app.tempMsg = router.app.nextMsg;
+  router.app.nextMsg = null;
+  next();
+});
+
+export default router;

@@ -111,8 +111,9 @@ export default {
             auth.login(this.username, this.password, this).then((response) => {
                 console.log("Bien passé")
                 this.response = response
-                this.loggedIn = true,
-                    this.$router.push("/")
+                this.loggedIn = true
+                this.$root.nextMsg = "You are now conected"
+                this.$router.push("/")
             }).catch(err => {
                 this.error = err.response.data
             })
@@ -163,5 +164,9 @@ div.column {
     background-color: #06425c;
     border: white solid 1px;
     margin: 0 20px 30px
+}
+
+article.message.is-danger {
+    margin: 10px
 }
 </style>
