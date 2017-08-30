@@ -29,7 +29,7 @@
       </header>
     </div>
     <!-- </section> -->
-    <p v-if="!$root.user" class="notification nav-item is-danger">You are disconnected</p>
+    <!-- <p v-if="!$root.user" class="notification nav-item is-danger">You are disconnected</p> -->
     <div class="logoThen">
       <img src="./assets/logo-then2.png" style="width: 500px">
     </div>
