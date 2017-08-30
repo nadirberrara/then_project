@@ -165,4 +165,8 @@ a.fa.fa-twitter {
 div.notification p {
   transform: translateY(-50%)
 }
+
+div.notification {
+  margin-top: 3px
+}
 </style>
