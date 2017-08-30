@@ -8,38 +8,37 @@
         </div>
         <hr>
 
-        <!-- <div v-else="ifLoggedOut"> -->
-        <div class="notification is-info">
-            You have to be logged In to post a new story
+        <div v-if="!$root.user">
+            <div class="notification is-info">
+                You have to be logged In to post a new story
+            </div>
+            <router-link to="/signup" class="card-footer-item ">
+                <button class="button">Login / Signup</button>
+            </router-link>
         </div>
-        <router-link to="/signup" class="card-footer-item ">
-            <button class="button">Login / Signup</button>
-        </router-link>
-        <!-- </div> -->
-        <hr>
-        <!-- <div v-if="ifLoggedIn"> -->
-        <div v-if="bravo" class="notification is-primary">
-            Your story was added successfully
-        </div>
-        <div v-if="danger" class="notification is-danger">
-            Informations missing
-        </div>
+        <div v-if="$root.user">
+            <div v-if="bravo" class="notification is-primary">
+                Your story was added successfully
+            </div>
+            <div v-if="danger" class="notification is-danger">
+                Informations missing
+            </div>
 
-        <form action="" @submit.prevent="createNewEpic">
-            <div>
-                <p>Choose a title :</p>
-                <input type="text" class="button is-large" v-model="title">
-            </div>
-            <div class="story">
-                <p>Start your story:</p>
-                <textarea name="" id="" cols="30" rows="2" class="textarea is-medium" v-model="text"></textarea>
-            </div>
-            <div>
-                <button class="button submit">Submit my story</button>
-            </div>
-        </form>
+            <form action="" @submit.prevent="createNewEpic">
+                <div>
+                    <p>Choose a title :</p>
+                    <input type="text" class="button is-large" v-model="title">
+                </div>
+                <div class="story">
+                    <p>Start your story:</p>
+                    <textarea name="" id="" cols="30" rows="2" class="textarea is-medium" v-model="text"></textarea>
+                </div>
+                <div>
+                    <button class="button submit">Submit my story</button>
+                </div>
+            </form>
 
-        <!-- </div> -->
+        </div>
 
     </div>
 </template>
@@ -108,6 +107,15 @@ p {
 button.button.submit {
     color: #06425c
 }
+
+
+
+
+
+
+
+
+
 
 
 

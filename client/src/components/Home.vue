@@ -1,6 +1,12 @@
 <template>
     <section class="">
 
+        <div class="notification" v-if="$root.tempMsg">
+            <p>
+                {{ $root.tempMsg }}
+            </p>
+        </div>
+
         <div class="columns photos">
 
             <div class="column">
@@ -75,7 +81,7 @@ export default {
     data() {
         return {
             msg: "WELCOME",
-            epics: null
+            epics: null,
         };
     },
     created() {

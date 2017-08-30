@@ -2,10 +2,21 @@
     <div>
 
         <div class="columns">
+            <div class="column">
+                <p>I want to : </p>
+                <button class="button" @click="SignupFromLogin">Sign Up</button>
+                <button class="button" @click="loginFromSignup">Log In</button>
+            </div>
+        </div>
+
+        <div class="columns">
             <form class="column" v-if="loginSignup" @submit.prevent="signup">
-                <h1 class="title">Please Sign Up :</h1>
-                <hr>
-                <div class="notification is-primary" v-if="registered">You are now registered</div>
+                <h1 class="title">Sign Up :</h1>
+                <div class="notification is-primary" v-if="registered">
+                    <p>You are now registered</p>
+                    <button class="button" @click="loginFromSignup">Please Log In</button>
+
+                </div>
 
                 <article v-if="error" class="message is-danger">
                     <div class="message-body">{{ error }}</div>
@@ -33,17 +44,10 @@
                 </div>
                 <button class="button" type="submit">Signup</button>
 
-                <div class="already">
-                    <p>Already have an account?
-                    </p>
-                    <button class="button" @click="loginFromSignup">Log In</button>
-                </div>
-
             </form>
 
             <form class="column" v-else @submit.prevent="login">
-                <h1 class="title">Please Log In :</h1>
-                <hr>
+                <h1 class="title">Log In :</h1>
                 <div class="notification is-primary" v-if="loggedIn">You are now connected</div>
 
                 <article v-if="error" class="message is-danger">
@@ -65,12 +69,6 @@
                 </div>
 
                 <button type="submit" class="button">Login</button>
-
-                <div class="already">
-                    <p>I need an account
-                    </p>
-                    <button class="button" @click="SignupFromLogin">Sign Up</button>
-                </div>
 
             </form>
 
@@ -113,8 +111,10 @@ export default {
             auth.login(this.username, this.password, this).then((response) => {
                 console.log("Bien passé")
                 this.response = response
-                this.loggedIn = true,
-                    this.$router.push("/")
+                this.loggedIn = true
+                this.$router.push("/", () => {
+                    this.$root.tempMsg = "You are now connected"
+                })
             }).catch(err => {
                 this.error = err.response.data
             })
@@ -157,7 +157,17 @@ h1.title {
 }
 
 p {
-    margin-top: 80px;
+    margin-bottom: 10px;
     color: white
+}
+
+div.column {
+    background-color: #06425c;
+    border: white solid 1px;
+    margin: 0 20px 30px
+}
+
+article.message.is-danger {
+    margin: 10px
 }
 </style>
