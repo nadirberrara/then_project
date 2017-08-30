@@ -40,21 +40,27 @@
       <div class="">
         <router-view></router-view>
 
-        <div class="logo">
-          <div class="columns is-half is-narrow">
-            <div class="column ">
-              <a href="http://facebook.com" target="_blank" class="fa fa-facebook"></a>
-              <a href="http://plus.google.com" target="_blank" class="fa fa-google-plus"></a>
-              <a href="http://linkedin.com" target="_blank" class="fa fa-linkedin"></a>
-              <a href="http://twitter.com" target="_blank" class="fa fa-twitter"></a>
-            </div>
-          </div>
-          <img src="./assets/logo3-copie2.png" style="width: 200px">
-        </div>
-
         <hr>
         <div class="">
-          <footer> @ Nadir BERRARA / IH Jun17 </footer>
+          <footer>
+            <div class="logo">
+              <div class="columns is-half is-narrow">
+                <div class="column ">
+                  <a href="http://facebook.com" target="_blank" class="fa fa-facebook"></a>
+                  <a href="http://plus.google.com" target="_blank" class="fa fa-google-plus"></a>
+                  <a href="http://linkedin.com" target="_blank" class="fa fa-linkedin"></a>
+                  <a href="http://twitter.com" target="_blank" class="fa fa-twitter"></a>
+                </div>
+
+              </div>
+              <hr>
+
+              <img src="./assets/logo3-copie2.png" style="width: 200px">
+            </div>
+            <p>
+              @ Nadir BERRARA / IH Jun17
+            </p>
+          </footer>
         </div>
       </div>
 

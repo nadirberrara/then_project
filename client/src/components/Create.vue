@@ -16,7 +16,6 @@
                 <button class="button">Login / Signup</button>
             </router-link>
         </div>
-        <hr>
         <div v-if="$root.user">
             <div v-if="bravo" class="notification is-primary">
                 Your story was added successfully
@@ -108,6 +107,11 @@ p {
 button.button.submit {
     color: #06425c
 }
+
+
+
+
+
 
 
 
