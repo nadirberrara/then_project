@@ -112,8 +112,9 @@ export default {
                 console.log("Bien passé")
                 this.response = response
                 this.loggedIn = true
-                this.$root.nextMsg = "You are now conected"
-                this.$router.push("/")
+                this.$router.push("/", () => {
+                    this.$root.tempMsg = "You are now connected"
+                })
             }).catch(err => {
                 this.error = err.response.data
             })

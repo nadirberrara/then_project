@@ -35,8 +35,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  router.app.tempMsg = router.app.nextMsg;
-  router.app.nextMsg = null;
+  router.app.tempMsg = null;
   next();
 });
 

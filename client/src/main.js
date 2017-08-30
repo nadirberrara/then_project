@@ -12,8 +12,7 @@ new Vue({
   router,
   data: {
     user: null,
-    tempMsg: null,
-    nextMsg: null
+    tempMsg: null
   },
   template: "<App/>",
   components: { App }
