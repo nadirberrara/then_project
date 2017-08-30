@@ -106,6 +106,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
+section {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 div.column img {
     border: 1px solid white
 }
