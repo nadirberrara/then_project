@@ -10,6 +10,18 @@
               HOME
               <!-- <img src="" alt=""> -->
             </router-link>
+
+          </div>
+
+          <div class="notification is-primary" v-if="$root.tempMsg && $root.user">
+            <p>
+              {{ $root.tempMsg }}
+            </p>
+          </div>
+          <div class="notification is-danger" v-if="$root.tempMsg && !$root.user">
+            <p>
+              {{ $root.tempMsg }}
+            </p>
           </div>
 
           <span class="nav-toggle">
@@ -17,6 +29,7 @@
             <span></span>
             <span></span>
           </span>
+
           <div class="nav-right nav-menu">
             <router-link to="/create" class="nav-item">
               New Story
@@ -81,7 +94,7 @@ export default {
   methods: {
     logout(event) {
       event.preventDefault()
-      this.$root.tempMsg = "bye bye"
+      this.$root.tempMsg = "See you soon :)"
       auth.logout(this)
     }
   }
@@ -147,5 +160,9 @@ a.fa.fa-linkedin {
 a.fa.fa-twitter {
   margin: auto 5px;
   color: #00aced
+}
+
+div.notification p {
+  transform: translateY(-50%)
 }
 </style>
