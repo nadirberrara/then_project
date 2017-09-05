@@ -9,6 +9,7 @@
 
       <div v-if="epic && allStories" class="epic">
         <div class="titre">
+          <i>by ({{ epic.userId }}) </i>
           <h3 class="title"> {{ epic.title }} </h3>
           <p>-</p>
           <p>{{epic.mainStory}}</p>
@@ -16,10 +17,14 @@
 
         <div>
           <div class="suite">
-            <p v-for="nextStory in epic.nextStories">
+            <div v-for="nextStory in epic.nextStories">
+              <p class="card is-pulled-left">by username</p>
               <span class="blue">
                 then,
-              </span> {{ nextStory }}</p>
+              </span>
+              <p>{{ nextStory }}</p>
+
+            </div>
           </div>
 
         </div>
@@ -186,5 +191,9 @@ h3.title {
   background-color: rgba(205, 187, 121, 0.9);
   color: white;
   border: white solid 3px
+}
+
+p.card.is-pulled-left {
+  padding: 2px
 }
 </style>
