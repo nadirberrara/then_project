@@ -3,12 +3,13 @@
 
         <div class="block scroll">
             <div class="story" v-for="story in stories">
-                <span>then, {{ story.text }}</span>
+                <p class="card is-pulled-left">by username{{ story.userId }}</p>
                 <span class="is-pulled-right">
                     <button @click="$emit('like-story', story._id)" class="button is-right">
                         <i class="fa fa-thumbs-o-up"></i> {{ story.likes.length }}
                     </button>
                 </span>
+                <span>then, {{ story.text }}</span>
 
             </div>
             <button class="button" v-if="$root.user && $root.user.id === epic.userId" type="submit" @click="$emit('push-story')"> Push the best story </button>
@@ -62,5 +63,10 @@ export default {
 
 th {
     color: #06425C
+}
+
+p.card.is-pulled-left {
+    padding: 2px;
+    margin-right: 5px
 }
 </style>
